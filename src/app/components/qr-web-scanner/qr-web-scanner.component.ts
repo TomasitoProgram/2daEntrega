@@ -4,13 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EventEmitter } from '@angular/core';
 import jsQR, { QRCode } from 'jsqr';
+import { Asistencia } from 'src/app/model/asistencia';
+import { WelcomeComponent } from '../welcome/welcome.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-qrwebscanner',
   templateUrl: './qr-web-scanner.component.html',
   styleUrls: ['./qr-web-scanner.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule,WelcomeComponent,FooterComponent],
 })
 export class QrWebScannerComponent implements OnDestroy {
 
@@ -18,10 +21,11 @@ export class QrWebScannerComponent implements OnDestroy {
   @ViewChild('canvas') private canvas!: ElementRef;
   @Output() scanned: EventEmitter<string> = new EventEmitter<string>();
   @Output() stopped: EventEmitter<void> = new EventEmitter<void>();
+  @ViewChild(FooterComponent) footer!: FooterComponent;
 
   qrData: string = '';
   mediaStream: MediaStream | null = null; // Almacena el flujo de medios
-
+  selectedComponent = 'welcome';
   constructor() 
   { 
     this.startQrScanningForWeb();
@@ -54,13 +58,17 @@ export class QrWebScannerComponent implements OnDestroy {
     const context: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d');
     context.drawImage(this.video.nativeElement, 0, 0, w, h);
     const img: ImageData = context.getImageData(0, 0, w, h);
-    let qrCode: QRCode  | null = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
+    let qrCode: QRCode | null = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
     if (qrCode) {
       const data = qrCode.data;
       if (data !== '') {
-        this.stopCamera();
-        this.scanned.emit(qrCode.data);
-        return true;
+        // Verificar si el QR escaneado es de asistencia
+        if (Asistencia.isvalidasistenciaQrCode(data)) {
+          this.stopCamera();
+          this.scanned.emit(data);  // Emitir el QR válido
+          return true;
+        } else {
+        }
       }
     }
     return false;
@@ -78,8 +86,8 @@ export class QrWebScannerComponent implements OnDestroy {
 
   stopCamera() {
     if (this.mediaStream) {
-      this.mediaStream.getTracks().forEach(track => track.stop()); // Detén todas las pistas de video
-      this.mediaStream = null; // Limpia el flujo de medios
+      this.mediaStream.getTracks().forEach(track => track.stop());
+      this.mediaStream = null;
     }
   }
 

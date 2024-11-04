@@ -1,0 +1,57 @@
+<ion-content>
+
+  <div class="background-image" *ngIf="asi"></div>
+
+  <ion-grid fixed *ngIf="asi" class="usuario-content">
+    <ion-row>
+      <ion-col size="5">Sede</ion-col>
+      <ion-col size="7">{{ asi.sede }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">ID Asignatura</ion-col>
+      <ion-col size="7">{{ asi.idAsignatura }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Seccion</ion-col>
+      <ion-col size="7">{{ asi.seccion }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Nombre Asignatura</ion-col>
+      <ion-col size="7">{{ asi.nombreAsignatura }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Nombre Profesor</ion-col>
+      <ion-col size="7">{{ asi.nombreProfesor }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Día</ion-col>
+      <ion-col size="7">{{ asi.dia }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Bloque Inicio</ion-col>
+      <ion-col size="7">{{ asi.bloqueInicio }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Bloque Término</ion-col>
+      <ion-col size="7">{{ asi.bloqueTermino }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Hora Inicio</ion-col>
+      <ion-col size="7">{{ asi.horaInicio }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">Hora Fin</ion-col>
+      <ion-col size="7">{{ asi.horaFin }}</ion-col>
+    </ion-row>
+
+
+
+  </ion-grid>
+
+  <div *ngIf="!asi" class="center-frame">
+    <div class="picture-frame ion-text-center">
+      <img class="you-must-scan" src="/assets/images/you-must-scan.png">
+    </div>
+  </div>
+
+</ion-content>

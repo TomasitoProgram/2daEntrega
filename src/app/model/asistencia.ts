@@ -1,51 +1,112 @@
+import { showAlert } from "../tools/message-functions";
+
 export class Asistencia {
 
-  public bloqueInicio: number;
-  public bloqueTermino: number;
-  public dia: string;
-  public horaFin: string;
-  public horaInicio: string;
-  public idAsignatura: string;
-  public nombreAsignatura: string;
-  public nombreProfesor: string;
-  public seccion: string;
-  public sede: string;
 
-  constructor() {
-    this.bloqueInicio = 0;
-    this.bloqueTermino = 0;
-    this.dia = '';
-    this.horaFin = '';
-    this.horaInicio = '';
-    this.idAsignatura = '';
-    this.nombreAsignatura = '';
-    this.nombreProfesor = '';
-    this.seccion = '';
-    this.sede = '';
+
+  
+    static jsonAsistenciaExample =
+   `{
+    "bloqueInicio": "7",
+    "bloqueTermino": "9",
+    "dia": "2022-08-09",
+    "horaFin": "15:15",
+    "horaInicio": "13:00",
+    "idAsignatura": "PGY4121",
+    "nombreAsignatura": "Aplicaciones Móviles",
+    "nombreProfesor": "Cristián Gómez Vega",
+    "seccion": "001D",
+    "sede": "Alonso Ovalle"
+  }`;
+  
+    static jsonAsistenciaEmpty =
+    `{
+      "bloqueInicio": "",
+      "bloqueTermino": "",
+      "dia": "",
+      "horaFin": "",
+      "horaInicio": "",
+      "idAsignatura": "",
+      "nombreAsignatura": "",
+      "nombreProfesor": "",
+      "seccion": "",
+      "sede": ""
+    }`;
+  
+    bloqueInicio = 0;
+    bloqueTermino = 0;
+    dia = '';
+    horaFin = '';
+    horaInicio = '';
+    idAsignatura = '';
+    nombreAsignatura = '';
+    nombreProfesor = '';
+    seccion = '';
+    sede = '';
+  
+    constructor() { }
+  
+    public static getNewasistencia(
+      bloqueInicio: number,
+      bloqueTermino: number,
+      dia: string,
+      horaFin: string,
+      horaInicio: string,
+      idAsignatura: string,
+      nombreAsignatura: string,
+      nombreProfesor: string,
+      seccion: string,
+      sede: string
+    ) {
+      const asi = new Asistencia();
+      asi.bloqueInicio = bloqueInicio;
+      asi.bloqueTermino = bloqueTermino;
+      asi.dia = dia;
+      asi.horaFin = horaFin;
+      asi.horaInicio = horaInicio;
+      asi.idAsignatura = idAsignatura;
+      asi.nombreAsignatura = nombreAsignatura;
+      asi.nombreProfesor = nombreProfesor;
+      asi.seccion = seccion;
+      asi.sede = sede;
+      return asi;
+    }
+    obtenerAsistenciaDesdeQR(qr: string){
+      if (Asistencia.isvalidasistenciaQrCode(qr)){
+        return JSON.parse(qr) as Asistencia;
+      }
+      return new Asistencia();
+    }
+  
+  
+    static isvalidasistenciaQrCode(qr: string) {
+      if (qr === '') return false;
+  
+      try {
+        const json = JSON.parse(qr);
+  
+        // Verifica que todos los campos requeridos estén presentes
+        if (
+          json.bloqueInicio !== undefined &&
+          json.bloqueTermino !== undefined &&
+          json.dia !== undefined &&
+          json.horaFin !== undefined &&
+          json.horaInicio !== undefined &&
+          json.idAsignatura !== undefined &&
+          json.nombreAsignatura !== undefined &&
+          json.nombreProfesor !== undefined &&
+          json.seccion !== undefined &&
+          json.sede !== undefined
+        ) {
+          console.log("Código QR válido."); // Log de validación exitosa
+          return true; // Si todos los campos requeridos están presentes
+        }
+      } catch (error) {
+        console.error("Error al parsear el QR: ", error);
+      }
+  
+      showAlert('El código QR escaneado no corresponde al de Asistencia');
+      return false;  // Si no pasa la validación
+    }
   }
-
-  public setAsistencia(
-    bloqueInicio: number,
-    bloqueTermino: number,
-    dia: string,
-    horaFin: string,
-    horaInicio: string,
-    idAsignatura: string,
-    nombreAsignatura: string,
-    nombreProfesor: string,
-    seccion: string,
-    sede: string): void
-  {
-    this.bloqueInicio = bloqueInicio;
-    this.bloqueTermino = bloqueTermino;
-    this.dia = dia;
-    this.horaFin = horaFin;
-    this.horaInicio = horaInicio;
-    this.idAsignatura = idAsignatura;
-    this.nombreAsignatura = nombreAsignatura;
-    this.nombreProfesor = nombreProfesor;
-    this.seccion = seccion;
-    this.sede = sede;
-  }
-
-}
+  

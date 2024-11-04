@@ -1,0 +1,26 @@
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.usuario-content {
+  width: 90%; /* Ajusta el ancho como prefieras */
+  max-width: 500px; /* Ancho máximo para el grid */
+  margin: auto;
+}
+
+.center-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Para ocupar toda la altura del ion-content */
+}
+
+.picture-frame {
+  max-width: 300px; /* Ajusta el tamaño de la imagen */
+}
+
+.you-must-scan {
+  width: 100%; /* La imagen se adapta al tamaño del marco */
+}
