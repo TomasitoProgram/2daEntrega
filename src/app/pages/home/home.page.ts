@@ -32,12 +32,12 @@ import { MisDatosComponent } from 'src/app/components/mis-datos/mis-datos.compon
     MiclaseComponent,AsistenciaComponent
 ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
-      CommonModule, FormsModule, TranslateModule, IonContent
-    , HeaderComponent, FooterComponent
-    , WelcomeComponent, QrWebScannerComponent, DinosaurComponent
-    , ForumComponent
-    , MisDatosComponent
-  ]
+  //     CommonModule, FormsModule, TranslateModule, 
+  //   , HeaderComponent, FooterComponent
+  //   , WelcomeComponent, QrWebScannerComponent, 
+  //   , ForumComponent
+  //   , MisDatosComponent
+  // ]
 })
 export class HomePage {
 
