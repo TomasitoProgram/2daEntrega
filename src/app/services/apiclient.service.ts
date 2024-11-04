@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { retry } from 'rxjs/operators';
 import { Post } from '../model/post';
 import { showAlertError } from '../tools/message-functions';
@@ -23,18 +23,20 @@ export class APIClientService {
   //apiUrl = 'http://192.168.100.227:3000';
   postList: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
 
-  //Crear una publicación y actualizar postList; devuelve el registro recién creado
-  async createPost(post: Post): Promise<Post | null> {
-    try {
-      const postWithoutId = {
-        "title": post.title,
-        "body": post.body,
-        "author": post.author,
-        "date": post.date,
-        "authorImage": post.authorImage
-      };
+  }
+
+  // Crear una publicación y actualizar postList; devuelve el registro recién creado
+  // async createPost(post: Post): Promise<Post | null> {
+  //   try {
+  //     const postWithoutId = {
+  //       "title": post.title,
+  //       "body": post.body,
+  //       "author": post.author,
+  //       "date": post.date,
+  //       "authorImage": post.authorImage
+  //     };
 
       const createdPost = await lastValueFrom(
         this.http.post<Post>(this.apiUrl + '/posts', 
