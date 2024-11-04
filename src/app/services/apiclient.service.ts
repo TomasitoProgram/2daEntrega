@@ -28,15 +28,15 @@ export class APIClientService {
   }
 
   // Crear una publicación y actualizar postList; devuelve el registro recién creado
-  // async createPost(post: Post): Promise<Post | null> {
-  //   try {
-  //     const postWithoutId = {
-  //       "title": post.title,
-  //       "body": post.body,
-  //       "author": post.author,
-  //       "date": post.date,
-  //       "authorImage": post.authorImage
-  //     };
+  async createPost(post: Post): Promise<Post | null> {
+    try {
+      const postWithoutId = {
+        "title": post.title,
+        "body": post.body,
+        "author": post.author,
+        "date": post.date,
+        "authorImage": post.authorImage
+      };
 
       const createdPost = await lastValueFrom(
         this.http.post<Post>(this.apiUrl + '/posts', 
