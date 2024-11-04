@@ -14,6 +14,9 @@ import { ScannerService } from 'src/app/services/scanner.service';
 import { WelcomeComponent } from 'src/app/components/welcome/welcome.component';
 import { ForumComponent } from 'src/app/components/forum/forum.component';
 
+/* importamos el componente mis-datos */
+import { MisDatosComponent } from 'src/app/components/mis-datos/mis-datos.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -24,6 +27,7 @@ import { ForumComponent } from 'src/app/components/forum/forum.component';
     , HeaderComponent, FooterComponent
     , WelcomeComponent, QrWebScannerComponent, DinosaurComponent
     , ForumComponent
+    , MisDatosComponent
   ]
 })
 export class HomePage {
