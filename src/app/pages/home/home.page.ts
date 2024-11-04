@@ -15,9 +15,8 @@ import { ForumComponent } from 'src/app/components/forum/forum.component';
 import { Router } from '@angular/router';
 import { MiclaseComponent } from "../../components/miclase/miclase.component";
 import { AsistenciaComponent } from 'src/app/components/asistencia/asistencia.component';
+import { MisdatosComponent } from 'src/app/components/misdatos/misdatos.component';
 
-/* importamos el componente mis-datos */
-import { MisDatosComponent } from 'src/app/components/mis-datos/mis-datos.component';
 
 @Component({
   selector: 'app-home',
@@ -29,15 +28,15 @@ import { MisDatosComponent } from 'src/app/components/mis-datos/mis-datos.compon
     HeaderComponent, FooterComponent,
     WelcomeComponent, QrWebScannerComponent,
     ForumComponent,
-    MiclaseComponent,AsistenciaComponent
+    MiclaseComponent,AsistenciaComponent, MisdatosComponent
 ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
-      CommonModule, FormsModule, TranslateModule, IonContent
-    , HeaderComponent, FooterComponent
-    , WelcomeComponent, QrWebScannerComponent, DinosaurComponent
-    , ForumComponent
-    , MisDatosComponent
-  ]
+    //   CommonModule, FormsModule, TranslateModule, IonContent
+    // , HeaderComponent, FooterComponent
+    // , WelcomeComponent, QrWebScannerComponent, DinosaurComponent
+    // , ForumComponent
+    // , MisDatosComponent
+  
 })
 export class HomePage {
 
