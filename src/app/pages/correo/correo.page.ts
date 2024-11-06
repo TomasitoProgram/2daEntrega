@@ -24,8 +24,10 @@ export class CorreoPage {
 
   recuperarContrasena() {
     // Lógica para recuperar la contraseña}
+    debugger
     this.databaseservice.findUserByEmail(this.email).then((usuario) => {
-      if (usuario) {
+      
+      if (usuario?.userName !== '') {
         const navigationExtras: NavigationExtras = {
           state: {
             usuario: usuario,

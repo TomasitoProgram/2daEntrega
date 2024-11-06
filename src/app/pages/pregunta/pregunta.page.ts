@@ -15,16 +15,18 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 export class PreguntaPage {
 
   public usuario = new User();
-  public respuestaSecreta: string;
+  public secretQuestion: string;
+  public secretAnswer: string;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.usuario = new User();
-    this.respuestaSecreta = '';
+    this.secretQuestion = '';
+    this.secretAnswer='';
     this.activatedRoute.queryParams.subscribe(() => {
       const nav = router.getCurrentNavigation();
       if (nav) {
         if (nav.extras.state) {
-          this.usuario = nav.extras.state['user'];
+          this.usuario = nav.extras.state['usuario'];
         }
       }
     });
@@ -33,7 +35,7 @@ export class PreguntaPage {
   recuperarContrasena() {
     // Lógica para validar la respuesta y recuperar la contraseña
 
-    if (this.respuestaSecreta === this.usuario.secretAnswer) {
+    if (this.secretAnswer === this.usuario.secretAnswer) {
       const navigationExtras: NavigationExtras = {
         state: {
           usuario: this.usuario,
