@@ -248,9 +248,15 @@ export class DatabaseService {
 
   async findUserByEmail(email: string): Promise<User | undefined> {
     try {
+      debugger
       const q = 'SELECT * FROM USER WHERE email=?;';
       const rows = (await this.db.query(q, [email])).values;
-      return rows? this.rowToUser(rows[0]) : undefined;
+      if(rows?.length ===0){
+        return new User();
+      } else {
+        return rows? this.rowToUser(rows[0]) : undefined;
+      }
+      
     } catch (error) {
       showAlertError('DataBaseService.findUserByEmail', error);
       return undefined;
