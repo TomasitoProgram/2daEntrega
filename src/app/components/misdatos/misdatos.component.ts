@@ -65,6 +65,6 @@ export class MisDatosComponent {
   }
 
   goBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/inicio']);
   }
 }
