@@ -1,0 +1,92 @@
+
+
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div>
+    <h3> Bienvenido(a) {{usuario.nombre}} {{ usuario.apellido }} </h3>
+  </div>
+
+  <ion-item><ion-input label="Cuenta" labelPlacement="floating"
+        [(ngModel)]="usuario.cuenta"></ion-input></ion-item>
+
+  <ion-item><ion-input label="Nombre" labelPlacement="floating"
+        [(ngModel)]="usuario.nombre"></ion-input></ion-item>
+
+  <ion-item><ion-input label="Apellido" labelPlacement="floating"
+         [(ngModel)]="usuario.apellido"></ion-input></ion-item>
+
+  <ion-item><ion-input label="Correo" labelPlacement="floating"
+        [(ngModel)]="usuario.correo"></ion-input></ion-item>
+
+  <ion-item><ion-input label="Direccion" labelPlacement="floating"
+        [(ngModel)]="usuario.direccion"></ion-input></ion-item>
+
+
+
+  <ion-item><ion-input label="Pregunta secreta" labelPlacement="floating"
+        [(ngModel)]="usuario.preguntaSecreta"></ion-input></ion-item>
+
+  <ion-item><ion-input label="Respuesta secreta" labelPlacement="floating"
+        [(ngModel)]="usuario.respuestaSecreta"></ion-input></ion-item>
+
+
+  <ion-item class="font-size-12">
+    <ion-select [(ngModel)]="usuario.nivelEducacional.id"
+        (ionChange)="actualizarNivelEducacional($event)"
+        label="Educación" labelPlacement="floating">
+      <ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales"
+        [value]="nivelEducacional.id">
+          {{nivelEducacional.nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <app-date-picker
+        [(ngModel)]="usuario.fechaNacimiento"
+        (ionChange)="onFechaNacimientoChange($event)"
+        label="Nacimiento"
+        labelPlacement="floating">
+    </app-date-picker>
+  </ion-item>
+
+  <ion-item><ion-input label="Contraseña" labelPlacement="floating"
+    [(ngModel)]="usuario.password" type="password"></ion-input></ion-item>
+
+
+  <ion-button (click)="guardarUsuario()">
+    Guardar
+  </ion-button>
+  <ion-button (click)="goBack()">home</ion-button>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment value="codigoqr"></ion-segment>
+    
+      <ion-segment-button value="codigoqr">
+        <ion-icon name="home-outline"></ion-icon>
+        Inicio
+      </ion-segment-button>
+
+      <ion-segment-button value="miclase">
+        <ion-icon name="school-outline"></ion-icon>
+        Mi clase
+      </ion-segment-button>
+
+      <ion-segment-button value="foro">
+        <ion-icon name="pencil-outline"></ion-icon>
+        Foro
+      </ion-segment-button>
+
+      <ion-segment-button (click)="Yendo()">
+        <ion-icon name="grid-outline"></ion-icon>
+        Mis datos
+      </ion-segment-button>
+      
+  </ion-toolbar>
+</ion-footer>
