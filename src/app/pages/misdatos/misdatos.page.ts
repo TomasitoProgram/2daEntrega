@@ -14,12 +14,12 @@ import { NivelEducacional } from 'src/app/model/nivel-educacional';
 
 @Component({
   selector: 'app-misdatos',
-  templateUrl: './misdatos.component.html',
-  styleUrls: ['./misdatos.component.scss'],
+  templateUrl: './misdatos.page.html',
+  styleUrls: ['./misdatos.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule,IonicModule, DatePickerComponent]
+  imports: [CommonModule, FormsModule,IonicModule, DatePickerComponent]
 })
-export class MisDatosComponent {
+export class MisDatosPage {
   usuario: Usuario = new Usuario();
   usuarios: Usuario[] = [];
   publicaciones: Post[] = [];
@@ -66,5 +66,9 @@ export class MisDatosComponent {
 
   goBack() {
     this.router.navigate(['/inicio']);
+  }
+
+  Yendo(){
+    this.router.navigate(['/misdatos'])
   }
 }

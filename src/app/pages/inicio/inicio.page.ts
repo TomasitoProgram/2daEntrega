@@ -8,6 +8,7 @@ import { ForoComponent } from 'src/app/components/foro/foro.component';
 import { MisDatosComponent } from 'src/app/components/misdatos/misdatos.component';
 import { addIcons } from 'ionicons';
 import { gridOutline, homeOutline, pencilOutline, schoolOutline } from 'ionicons/icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -22,11 +23,15 @@ export class InicioPage {
 
   componente: string = 'codigoqr';
   
-  constructor() { 
+  constructor(private router: Router) { 
     addIcons({ homeOutline, schoolOutline, pencilOutline, gridOutline });
   }
 
   segmentChanged($event: any) {
     this.componente = $event.detail.value;
+  }
+
+  Yendo(){
+    this.router.navigate(['/misdatos'])
   }
 }
