@@ -1,5 +1,5 @@
 {
-    "AppName": "Duoc UC",
+    "AppName": "Angry-Dinosaurs",
     "AuthorText": "Rakinon tamiñ:",
     "Author": "Cristián Gómez Vega",
     "Language": "Dugün",
@@ -25,8 +25,6 @@
     "HomePage.Button.Scan": "Wütran",
     "HomePage.Button.Dinosaur": "Tüfachi Chod",
     "HomePage.Button.Forum": "Trapu",
-    "HomePage.Button.Mis-datos": "Mis datos",
-    "HomePage.Button.Miclase": "Mi clase",
 
     "ThemePage.Label.ColorTheme": "Dugün de kolor:",
     "ThemePage.Color.Light": "Külfün",

@@ -14,6 +14,7 @@ export class Persona {
     this.fechaNacimiento = new Date();
   }
 
+  // Formatear la fecha de nacimiento en dd/mm/yyyy
   public getFechaNacimiento(): string {
     if (!this.fechaNacimiento) return 'No asignada';
     // Obtener el día y agregar un cero inicial si es necesario

@@ -36,6 +36,7 @@ export class NivelEducacional {
   }
 
   public static buscarNivelEducacional(id: number): NivelEducacional | undefined {
+    
     return NivelEducacional.getNivelesEducacionales().find(n => n.id === id);
   }
 

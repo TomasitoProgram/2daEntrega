@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class IncorrectoPage {
 
-  imagen: string = 'src/assets/images/incorrecto.jpg'; // Modifica esta ruta cuando agregues la imagen
+  imagen: string = 'ruta/de/tu/imagen-error.png'; // Modifica esta ruta cuando agregues la imagen
 
   constructor(private router: Router) {}
 
@@ -22,4 +22,3 @@ export class IncorrectoPage {
     this.router.navigate(['/login']);
   }
 }
-

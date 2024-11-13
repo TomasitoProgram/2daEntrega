@@ -15,7 +15,8 @@ import { Usuario } from 'src/app/model/usuario';
 })
 export class CorrectoPage {
 
-  imagen: string = 'src/assets/images/correcto.jpg';
+  imagen: string = 'ruta/de/tu/imagen.png'; // Modifica esta ruta cuando agregues la imagen
+
   usuario: Usuario= new Usuario();
   
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {

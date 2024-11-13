@@ -16,14 +16,26 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-      CommonModule,         // CGV-Permite usar directivas comunes de Angular
-      FormsModule,          // CGV-Permite usar formularios
-      IonicModule,          // CGV-Permite usar componentes de Ionic como IonContent, IonItem, etc.
-      TranslateModule,      // CGV-Permite usar pipe 'translate'
-      LanguageComponent      // CGV-Lista de idiomas
+      CommonModule            // CGV-Permite usar directivas comunes de Angular
+    , FormsModule             // CGV-Permite usar formularios
+    , IonicModule             // CGV-Permite usar componentes de Ionic como IonContent, IonItem, etc.
+    , TranslateModule         // CGV-Permite usar pipe 'translate'
+    , LanguageComponent // CGV-Lista de idiomas
   ]
 })
 export class LoginPage implements ViewWillEnter {
+
+  /** 
+   * CGV-INI-Traducciones
+   * Para poder utilizar la traducción de textos, se debe:
+   *   1. Ejecutar: npm i @ngx-translate/core 
+   *   2. Ejecutar: npm i @ngx-translate/http-loader
+   *   3. Crear carpeta: src/app/assets/i18n
+   *   4. Crear archivo: src/app/assets/i18n/es.json para los textos en español
+   *   5. Crear archivo: src/app/assets/i18n/en.json para los textos en inglés
+   * 
+   * CGV-FIN-Traducciones
+  */ 
 
   @ViewChild('selectLanguage') selectLanguage!: LanguageComponent;
 
@@ -31,9 +43,9 @@ export class LoginPage implements ViewWillEnter {
   password: string;
 
   constructor(
-    private router: Router,
-    private translate: TranslateService,
-    private authService: AuthService) 
+      private router: Router
+    , private translate: TranslateService
+    , private authService: AuthService) 
   { 
     this.correo = 'atorres';
     this.password = '1234';
@@ -54,15 +66,11 @@ export class LoginPage implements ViewWillEnter {
   }
 
   registerNewUser() {
-    // Lógica para registrar un nuevo usuario
+
   }
 
   passwordRecovery() {
-    // Lógica para recuperar la contraseña
-    this.router.navigate(['/correo']);
+    
   }
 
-  navigateToMap() {
-    this.router.navigate(['/map']);
-  }
 }

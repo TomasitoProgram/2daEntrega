@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonInput, IonButton, IonItem, IonLabel, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { User } from 'src/app/model/user';
+import { Usuario } from 'src/app/model/usuario';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -14,14 +14,12 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 })
 export class PreguntaPage {
 
-  public usuario = new User();
-  public secretQuestion: string;
-  public secretAnswer: string;
+  public usuario: Usuario;
+  public respuestaSecreta: string;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    this.usuario = new User();
-    this.secretQuestion = '';
-    this.secretAnswer='';
+    this.usuario = new Usuario();
+    this.respuestaSecreta = '';
     this.activatedRoute.queryParams.subscribe(() => {
       const nav = router.getCurrentNavigation();
       if (nav) {
@@ -35,7 +33,7 @@ export class PreguntaPage {
   recuperarContrasena() {
     // Lógica para validar la respuesta y recuperar la contraseña
 
-    if (this.secretAnswer === this.usuario.secretAnswer) {
+    if (this.respuestaSecreta === this.usuario.respuestaSecreta) {
       const navigationExtras: NavigationExtras = {
         state: {
           usuario: this.usuario,

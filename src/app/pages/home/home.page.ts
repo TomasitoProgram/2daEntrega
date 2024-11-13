@@ -1,101 +1,159 @@
-import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
-import { QrWebScannerComponent } from 'src/app/components/qr-web-scanner/qr-web-scanner.component';
-import { Asistencia } from 'src/app/model/asistencia';
-import { Capacitor } from '@capacitor/core';
-import { ScannerService } from 'src/app/services/scanner.service';
-import { WelcomeComponent } from 'src/app/components/welcome/welcome.component';
-import { ForumComponent } from 'src/app/components/forum/forum.component';
-import { Router } from '@angular/router';
-import { MiclaseComponent } from "../../components/miclase/miclase.component";
-import { AsistenciaComponent } from 'src/app/components/asistencia/asistencia.component';
-import { MisdatosComponent } from 'src/app/components/misdatos/misdatos.component';
-
+import { GeolocationService } from 'src/app/services/geolocation-service.service';
+import * as L from 'leaflet'; // Importamos Leaflet
+import { HttpClient } from '@angular/common/http';
+import { Route, Router } from '@angular/router';
+import { arrowBackCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, FormsModule, TranslateModule, IonicModule,
-    HeaderComponent, FooterComponent,
-    WelcomeComponent, QrWebScannerComponent,
-    ForumComponent,
-    MiclaseComponent,AsistenciaComponent, MisdatosComponent
-],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
-  //     CommonModule, FormsModule, TranslateModule, 
-  //   , HeaderComponent, FooterComponent
-  //   , WelcomeComponent, QrWebScannerComponent, 
-  //   , ForumComponent
-  //   , MisDatosComponent
-  // ]
+      CommonModule    // CGV-Permite usar directivas comunes de Angular
+    , FormsModule     // CGV-Permite usar formularios
+    , IonicModule     // CGV-Permite usar componentes de Ionic como IonContent, IonItem, etc.
+    , TranslateModule // CGV-Permite usar pipe 'translate'
+    , HeaderComponent // CGV-Permite usar el componente Header
+    , FooterComponent // CGV-Permite usar el componente Footer
+  ]
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  @ViewChild(FooterComponent) footer!: FooterComponent;
-  selectedComponent = 'welcome';
-  asistencia: Asistencia | null = null;
+  map: L.Map | null = null;
+  addressName: string = '';
+  distance: string = '';
 
-  constructor(private auth: AuthService, private scanner: ScannerService, private router: Router) { }
+  constructor(private geo: GeolocationService, private http: HttpClient, private router: Router
+  ) { 
+    addicons: ({arrowBackCircleOutline});
 
-  ionViewWillEnter() {
-    this.changeComponent('welcome');
   }
 
-  async headerClick(button: string) {
-
-    if (button === 'testqr')
-      this.showAsistenciaComponent(Asistencia.jsonAsistenciaExample);
-
-    if (button === 'scan' && Capacitor.getPlatform() === 'web')
-      this.selectedComponent = 'qrwebscanner';
-
-    if (button === 'scan' && Capacitor.getPlatform() !== 'web')
-        this.showAsistenciaComponent(await this.scanner.scan());
+  ngOnInit() {
+    this.loadMap();
+    this.fixLeafletIconPath();
   }
 
-  webQrScanned(qr: string) {
-    this.showAsistenciaComponent(qr);
+  async loadMap() {
+    debugger
+    await this.geo.getCurrentPosition().then((position: { lat: number, lng: number } | null) => {
+      debugger
+      if (position) {
+        
+        // Configuramos el centro del mapa y el nivel de zoom
+        this.map = L.map('mapId').setView([position.lat, position.lng], 50);
+
+        // Cargamos el mapa de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(this.map);
+        
+        // Ir a mi ubicación
+        this.goToMyPosition();
+      } else {
+        console.log('Posición geográfica desconocida');
+      }
+    }).catch((error) => {
+      console.log('Error al obtener la posición geográfica');
+    });
   }
 
-  webQrStopped() {
-    this.changeComponent('welcome');
+  goToDUOC() {
+    this.goToPosition(-33.44703, -70.65762, 50, 'Instituto DUOC Padre Alonso de Ovalle');
   }
 
-  showAsistenciaComponent(qr: string) {
-    console.log("Código QR recibido:", qr);
-    if (Asistencia.isvalidasistenciaQrCode(qr)) {
-      this.auth.qrCodeData.next(qr);
-      console.log("Cambiando a componente de asistencia.");
-      this.changeComponent('asistencia');
-      console.log("Selected component now is:", this.selectedComponent);
-      return;
+  async goToMyPosition() {
+    this.geo.getCurrentPosition().then((position: { lat: number, lng: number } | null) => {
+      if (position) {
+        this.goToPosition(position.lat, position.lng, 50, 'Mi ubicación');
+      }
+    });
+  }
+
+  goToPosition(lat: number, lng: number, zoom: number, popupText: string) {
+    if (this.map) {
+      // Centrar el mapa en Santiago
+      this.map.setView([lat, lng], zoom);
+
+      // Agregar un marcador en las coordenadas de Santiago
+      const marker = L.marker([lat, lng]).addTo(this.map);
+      marker.bindPopup(popupText).openPopup();
     }
-
-    this.changeComponent('welcome');
   }
 
-  footerClick(button: string) {
-    this.selectedComponent = button;
-    console.log("Botón del footer seleccionado:", button); // Para depuración
-
+  async getMyAddress(lat: number, lng: number) {
+    this.geo.getPlaceFromCoordinates(lat, lng).subscribe({
+      next: (value: any) => {
+        this.addressName = value.display_name;
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.addressName = '';
+      }
+    });
   }
 
-  changeComponent(name: string) {
-    this.selectedComponent = name;
-    this.footer.selectedButton = name;
-    console.log("Cambiando componente a:", name); // Para depuración
+  showRouteToDuoc() {
+    this.geo.getCurrentPosition().then((position: { lat: number, lng: number } | null) => {
+      if (position) {
+        this.goToPosition(position.lat, position.lng, 50, 'Mi ubicación');
+        this.getRoute({ lat: position.lat, lng: position.lng }
+            , { lat: -33.44703, lng: -70.65762 }, "walking");
+      }
+    });
+  }
 
+  getRoute(start: { lat: number, lng: number }, end: { lat: number, lng: number }, mode: 'driving' | 'walking') {
+    // URL de la API de OSRM para obtener la ruta, cambiamos el modo de transporte dinámicamente (driving o walking)
+    const url = `https://router.project-osrm.org/route/v1/${mode}/${start.lng},${start.lat};${end.lng},${end.lat}?overview=full&geometries=geojson`;
+    console.log(url);
+  
+    // Realizamos una solicitud HTTP para obtener la ruta
+    this.http.get(url).subscribe((response: any) => {
+      if (this.map) {
+        const routeCoords = response.routes[0].geometry.coordinates;
+  
+        // Convertimos las coordenadas de la ruta en formato Leaflet
+        const routeLatLngs = routeCoords.map((coord: [number, number]) => [coord[1], coord[0]]);
+  
+        // Dibujamos la línea de la ruta en el mapa
+        const routeLine = L.polyline(routeLatLngs, { color: 'blue', weight: 5 }).addTo(this.map);
+  
+        // Ajustamos el mapa para que la ruta sea visible en la pantalla
+        this.map.fitBounds(routeLine.getBounds());
+  
+        // Extraer la distancia y la duración de la respuesta
+        const distance = response.routes[0].distance / 1000; // Distancia en kilómetros
+        const duration = response.routes[0].duration / 60;   // Duración en minutos
+
+        this.distance = `Distancia: ${distance.toFixed(2)} km `
+            + `, Estimado: ${duration.toFixed(2)} minutos`;
+      }
+
+    });
   }
-  gotomisdatos(){
-    this.router.navigate(['/mis-datos']);
+
+  fixLeafletIconPath() {
+    // Sobrescribimos las rutas de los iconos de Leaflet
+    const iconDefault = L.icon({
+      iconUrl: 'assets/leaflet/images/marker-icon.png',
+      shadowUrl: 'assets/leaflet/images/marker-shadow.png',
+    });
+    
+    L.Marker.prototype.options.icon = iconDefault;
   }
+
+  retroceder(){
+    this.router.navigate(['/ingreso']);
+  }
+  
+
 }

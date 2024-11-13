@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './foro.component.html',
   styleUrls: ['./foro.component.scss'],
   standalone: true,
+  imports: []
 })
 export class ForoComponent  implements OnInit {
 

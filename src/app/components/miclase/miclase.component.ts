@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './miclase.component.html',
   styleUrls: ['./miclase.component.scss'],
   standalone: true,
+  imports: []
 })
 export class MiclaseComponent  implements OnInit {
 

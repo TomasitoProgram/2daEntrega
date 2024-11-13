@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonGrid,IonItem, IonCol, IonRow, IonInput, IonCard, IonLabel, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { DatabaseService } from 'src/app/services/database.service';
+import { DataBaseService } from 'src/app/services/data-base.service';
 
 @Component({
   selector: 'app-correo',
@@ -18,16 +18,14 @@ export class CorreoPage {
 
   email: string;
 
-  constructor(private router: Router, private databaseservice: DatabaseService) {
+  constructor(private router: Router, private databaseservice: DataBaseService) {
     this.email = '';
   }
 
   recuperarContrasena() {
     // Lógica para recuperar la contraseña}
-    debugger
-    this.databaseservice.findUserByEmail(this.email).then((usuario) => {
-      
-      if (usuario?.userName !== '') {
+    this.databaseservice.buscarUsuarioPorCorreo(this.email).then((usuario) => {
+      if (usuario) {
         const navigationExtras: NavigationExtras = {
           state: {
             usuario: usuario,

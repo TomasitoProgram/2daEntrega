@@ -5,7 +5,7 @@
   ],
   "java.import.gradle.java.home": "/usr/lib/jvm/jdk-22.0.2-oracle-x64",
   "java.configuration.updateBuildConfiguration": "interactive",
-  "android-webview-debug.adbPath": "/home/CETECOM/Android/Sdk/platform-tools/adb",
+  "android-webview-debug.adbPath": "/home/cgomezvega/Android/Sdk/platform-tools/adb",
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "files.autoSave": "afterDelay", 
   "editor.tabSize": 2, 

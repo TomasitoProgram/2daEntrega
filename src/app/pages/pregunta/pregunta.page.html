@@ -21,8 +21,7 @@
       <br>
 
       <ion-item class="ion-text-center">
-        <ion-label>P: {{ usuario.secretQuestion }}</ion-label>
-      dasda {{ usuario.secretQuestion }}
+        <ion-label>P: {{ usuario.preguntaSecreta }}</ion-label>
       </ion-item>
       <br>
 
@@ -34,7 +33,7 @@
     
       <ion-item>
         <ion-label position="floating">Respuesta</ion-label>
-        <ion-input [(ngModel)]="usuario.secretAnswer"></ion-input>
+        <ion-input [(ngModel)]="respuestaSecreta"></ion-input>
       </ion-item>
     
       <ion-button expand="full" (click)="recuperarContrasena()">Recuperar Contraseña</ion-button>

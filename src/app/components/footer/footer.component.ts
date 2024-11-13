@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-import { IonFooter, IonToolbar, IonSegment, IonSegmentButton, IonIcon } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { homeOutline, pawOutline, pencilOutline, qrCodeOutline, schoolOutline, personOutline } from 'ionicons/icons';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-footer',
@@ -14,21 +12,12 @@ import { homeOutline, pawOutline, pencilOutline, qrCodeOutline, schoolOutline, p
   imports: [
       CommonModule    // CGV-Permite usar directivas comunes de Angular
     , FormsModule     // CGV-Permite usar formularios
+    , IonicModule     // CGV-Permite usar componentes de Ionic como IonContent, IonItem, etc.
     , TranslateModule // CGV-Permite usar pipe 'translate'
-    , IonFooter, IonToolbar, IonSegment, IonSegmentButton, IonIcon
   ]
 })
 export class FooterComponent {
 
-  selectedButton = 'welcome';
-  @Output() footerClick = new EventEmitter<string>();
-
-  constructor() { 
-    addIcons({ homeOutline, qrCodeOutline, pawOutline, pencilOutline, schoolOutline, personOutline });
-  }
-
-  sendClickEvent($event: any) {
-    this.footerClick.emit(this.selectedButton);
-  }
+  constructor() { }
 
 }
