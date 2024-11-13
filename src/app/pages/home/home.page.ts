@@ -36,6 +36,17 @@ export class HomePage implements OnInit {
     addicons: ({arrowBackCircleOutline});
 
   }
+  async headerClick(button: string) {
+
+    // if (button === 'testqr')
+    //   this.showAsistenciaComponent(Asistencia.jsonAsistenciaExample);
+
+    // if (button === 'scan' && Capacitor.getPlatform() === 'web')
+    //   this.selectedComponent = 'qrwebscanner';
+
+    // if (button === 'scan' && Capacitor.getPlatform() !== 'web')
+    //     this.showAsistenciaComponent(await this.scanner.scan());
+  }
 
   ngOnInit() {
     this.loadMap();

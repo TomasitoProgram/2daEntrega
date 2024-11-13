@@ -55,17 +55,17 @@ export class AuthService {
       if (usuarioAutenticado) {
         this.usuarioAutenticado.next(usuarioAutenticado);
         this.primerInicioSesion.next(false); // Avisar que no es el primer inicio de sesión
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/home']);
       } else {
         await this.bd.buscarUsuarioValido(cuenta, password).then(async (usuario: Usuario | undefined) => {
           if (usuario) {
             showToast(`¡Bienvenido(a) ${usuario.nombre} ${usuario.apellido}!`);
             this.guardarUsuarioAutenticado(usuario);
             this.primerInicioSesion.next(true); // Avisar que es el primer inicio de sesión
-            this.router.navigate(['/inicio']);
+            this.router.navigate(['/home']);
           } else {
             showToast(`El correo o la password son incorrectos`);
-            this.router.navigate(['/ingreso']);
+            this.router.navigate(['/login']);
           }
         });
       }
@@ -78,7 +78,7 @@ export class AuthService {
         showToast(`¡Hasta pronto ${usuario.nombre} ${usuario.apellido}!`);
         this.eliminarUsuarioAutenticado(usuario);
       }
-      this.router.navigate(['/ingreso']);
+      this.router.navigate(['/login']);
     })
   }
 

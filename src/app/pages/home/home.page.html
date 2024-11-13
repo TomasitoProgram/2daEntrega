@@ -1,17 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Asistencia DUOC
-    </ion-title>
-    <div slot="end">
-      <ion-button (click)="retroceder()">
-        <ion-icon name="arrow-back-circle-outline">
-
-        </ion-icon>Mapa
-      </ion-button>
-    </div>
-  </ion-toolbar>
-  </ion-header>
+<app-header
+  (headerClick)="headerClick($event)">
+</app-header>
 
 <ion-content [fullscreen]="true">
   
