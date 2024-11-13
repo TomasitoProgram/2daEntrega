@@ -6,13 +6,13 @@ import { misDatosGuard } from './guards/mis-datos.guard';
 export const routes: Routes = [ 
   {
     path: '',
-    redirectTo: 'ingreso',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
     path: 'login',
     loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage),
-    canActivate: [ingresoGuard]
+    // canActivate: [ingresoGuard] 
   },
   {
     path: 'home',
@@ -52,5 +52,6 @@ export const routes: Routes = [
     path: 'inicio',
     loadComponent: () => import('./pages/inicio/inicio.page').then( m => m.InicioPage),
     canActivate: [inicioGuard]
-  },
+  }
+
 ];

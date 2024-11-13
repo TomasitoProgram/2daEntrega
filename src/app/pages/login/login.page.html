@@ -17,46 +17,58 @@
 
 <ion-content [fullscreen]="true">
 
-  <img class="background-image" src="/assets/images/bronto-portrait-04.jpg">
+  <img class="background-image" src="/assets/images/FRONTIS-PAO-1-scaled.png.jpg">
   
-  <h1 class="glow-text show-in-portrait margin-top-6"> {{ 'AppName' | translate }} </h1>
+  <h1 class="glow-text show-in-portrait margin-top-6"> Sistema de Asistencia </h1>
 
   <ion-card class="login-container transparent-input">
 
-    <ion-card-header class="show-in-portrait">
-      <ion-card-title color="light" class="glow-text">
-        <h4>
-          <b>
-            {{ 'Login.Title.Login' | translate }}
-          </b>
-        </h4>
+    <ion-card-header>
+      <ion-card-title class="vivid-gradient-title">
+        <h4><b>Iniciar sesión</b></h4>
       </ion-card-title>
     </ion-card-header>
 
     <ion-card-content class="transparent-input text-center">
       
-      <ion-item class="margin-bottom-6 float-left-landscape">
+      <!-- Orden de los campos: Correo y Contraseña -->
+      <ion-item class="margin-bottom-6">
         <ion-input 
-          label="{{ 'Login.Label.Email' | translate }}" 
+          label="Correo" 
           labelPlacement="floating"
           [(ngModel)]="correo" 
-          placeholder="{{ 'Login.Placeholder.Email' | translate }}">
+          placeholder="Ingrese su correo">
         </ion-input>
       </ion-item>
 
-      <ion-item class="margin-bottom-6 float-right-landscape">
+      <ion-item class="margin-bottom-6">
         <ion-input 
-          label="{{ 'Login.Label.Password' | translate }}"
+          label="Contraseña"
           labelPlacement="floating"
           [(ngModel)]="password" 
-          placeholder="{{ 'Login.Placeholder.Password' | translate }}"
+          placeholder="Ingrese su contraseña"
           type="password">
         </ion-input>
       </ion-item>
 
-      <div class="ion-text-center margin-top-6" style="clear: both;">
+      <!-- Botón de Ingresar -->
+      <div class="ion-text-center margin-top-6">
         <ion-button class="enter-button normal-text" shape="round" (click)="login()">
-          {{ 'Login.Button.Login' | translate }}
+          Ingresar
+        </ion-button>
+      </div>
+
+      <!-- Botón de ¿Olvidaste tu contraseña? -->
+      <div class="ion-text-center margin-top-4">
+        <ion-button fill="clear" color="primary" (click)="passwordRecovery()">
+          ¿Olvidaste tu contraseña?
+        </ion-button>
+      </div>
+
+      <!-- Botón de Mi Ruta -->
+      <div class="ion-text-center margin-top-4">
+        <ion-button color="secondary" shape="round" (click)="navigateToMap()">
+          Mi ruta
         </ion-button>
       </div>
 
@@ -65,12 +77,3 @@
   </ion-card>
 
 </ion-content>
-
-<ion-footer>
-  <ion-button color="primary" shape="block" (click)="registerNewUser()">
-    {{ 'Login.Button.Signin' | translate }}
-  </ion-button>
-  <ion-button color="secondary" shape="block" (click)="passwordRecovery()">
-    {{ 'Login.Button.ForgotPassword' | translate }}
-  </ion-button>
-</ion-footer>
