@@ -1,8 +1,10 @@
 
 
-<ion-header [translucent]="true">
 
-</ion-header>
+<app-header>
+
+</app-header>
+
 
 <ion-content [fullscreen]="true">
 
@@ -17,7 +19,7 @@
         [(ngModel)]="usuario.nombre"></ion-input></ion-item>
 
   <ion-item><ion-input label="Apellido" labelPlacement="floating"
-         [(ngModel)]="usuario.apellido"></ion-input></ion-item>
+        [(ngModel)]="usuario.apellido"></ion-input></ion-item>
 
   <ion-item><ion-input label="Correo" labelPlacement="floating"
         [(ngModel)]="usuario.correo"></ion-input></ion-item>
@@ -64,29 +66,6 @@
   <ion-button (click)="goBack()">home</ion-button>
 
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <ion-segment value="codigoqr"></ion-segment>
-    
-      <ion-segment-button value="codigoqr">
-        <ion-icon name="home-outline"></ion-icon>
-        Inicio
-      </ion-segment-button>
 
-      <ion-segment-button value="miclase">
-        <ion-icon name="school-outline"></ion-icon>
-        Mi clase
-      </ion-segment-button>
-
-      <ion-segment-button value="foro">
-        <ion-icon name="pencil-outline"></ion-icon>
-        Foro
-      </ion-segment-button>
-
-      <ion-segment-button (click)="Yendo()">
-        <ion-icon name="grid-outline"></ion-icon>
-        Mis datos
-      </ion-segment-button>
-      
-  </ion-toolbar>
-</ion-footer>
+<app-footer>
+</app-footer>

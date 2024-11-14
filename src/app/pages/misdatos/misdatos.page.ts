@@ -12,12 +12,16 @@ import { Router } from '@angular/router';
 import { DatePickerComponent } from 'src/app/components/date-picker/date-picker.component';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
 
+import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
+
+
 @Component({
   selector: 'app-misdatos',
   templateUrl: './misdatos.page.html',
   styleUrls: ['./misdatos.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule,IonicModule, DatePickerComponent]
+  imports: [CommonModule, FormsModule,IonicModule, DatePickerComponent, FooterComponent, HeaderComponent]
 })
 export class MisDatosPage {
   usuario: Usuario = new Usuario();
