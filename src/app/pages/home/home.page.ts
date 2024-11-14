@@ -14,6 +14,7 @@ import { arrowBackCircleOutline } from 'ionicons/icons';
 import { WelcomeComponent } from 'src/app/components/welcome/welcome.component';
 
 @Component({
+  
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
@@ -29,7 +30,7 @@ import { WelcomeComponent } from 'src/app/components/welcome/welcome.component';
   ]
 })
 export class HomePage implements OnInit {
-
+  selectedComponent = 'welcome';
   map: L.Map | null = null;
   addressName: string = '';
   distance: string = '';
@@ -184,5 +185,8 @@ export class HomePage implements OnInit {
     this.router.navigate(['/login']);
   }
   
-
+  footerClick(button: string) {
+    this.selectedComponent = (button === 'mis-datos') ? 'misdatos' : button;
+    console.log("Botón del footer seleccionado:", button); // Para depuración
+  }
 }

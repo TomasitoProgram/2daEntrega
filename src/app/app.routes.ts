@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ingresoGuard } from './guards/ingreso-guard.service';
 import { inicioGuard } from './guards/inicio-guard.service';
 import { misDatosGuard } from './guards/mis-datos.guard';
+import { MisDatosComponent } from './components/misdatos/misdatos.component';
 
 export const routes: Routes = [ 
   {
@@ -23,11 +24,11 @@ export const routes: Routes = [
     path: 'theme',
     loadComponent: () => import('./pages/theme/theme.page').then( m => m.ThemePage)
   },
-  {
-    path: 'mis-datos',
-    loadComponent: () => import('./pages/mis-datos/mis-datos.page').then( m => m.MisDatosPage),
-    canActivate: [misDatosGuard]
-  },
+  // {
+  //   path: 'mis-datos',
+  //   loadComponent: () => import('./pages/mis-datos/mis-datos.page').then( m => m.MisDatosPage),
+  //   canActivate: [misDatosGuard]
+  // },
   {
     path: 'ingreso',
     loadComponent: () => import('./pages/ingreso/ingreso.page').then( m => m.IngresoPage)
@@ -53,15 +54,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/inicio/inicio.page').then( m => m.InicioPage),
     canActivate: [inicioGuard]
   },
-  {
-    path: 'misdatos',
-    loadComponent: () => import('./pages/misdatos/misdatos.page').then( m => m.MisDatosPage)
-  },
-  {
-    path: 'map',
-    loadComponent: () => import('./pages/map/map.page').then( m => m.MapPage),
-    // canActivate: [ingresoGuard] 
-  }
+  // {
+  //   path: 'misdatos',
+  //   loadComponent: () => import('./pages/misdatos/misdatos.page').then( m => m.MisDatosPage)
+  // }
+  { path: 'misdatos', component: MisDatosComponent }  // Ruta para el componente Mis Datos
 
 
 ];

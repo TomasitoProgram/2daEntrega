@@ -11,13 +11,16 @@ import { showToast } from 'src/app/tools/message-functions';
 import { Router } from '@angular/router';
 import { DatePickerComponent } from 'src/app/components/date-picker/date-picker.component';
 import { NivelEducacional } from 'src/app/model/nivel-educacional';
+import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from '../footer/footer.component';
+// import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-misdatos',
   templateUrl: './misdatos.component.html',
   styleUrls: ['./misdatos.component.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule,IonicModule, DatePickerComponent]
+  imports: [CommonModule, FormsModule, IonicModule, DatePickerComponent, HeaderComponent, FooterComponent]
 })
 export class MisDatosComponent {
   usuario: Usuario = new Usuario();
@@ -65,6 +68,6 @@ export class MisDatosComponent {
   }
 
   goBack() {
-    this.router.navigate(['/inicio']);
+    this.router.navigate(['/home']);
   }
 }
