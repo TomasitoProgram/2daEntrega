@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonFooter, IonToolbar, IonSegment, IonSegmentButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { homeOutline, pawOutline, pencilOutline, qrCodeOutline, schoolOutline, personOutline } from 'ionicons/icons';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -23,7 +23,7 @@ export class FooterComponent {
   selectedButton = 'welcome';
   @Output() footerClick = new EventEmitter<string>();
 
-  constructor() { 
+  constructor(private router:Router ) { 
     addIcons({ homeOutline, qrCodeOutline, pawOutline, pencilOutline, schoolOutline, personOutline });
   }
 
@@ -31,4 +31,7 @@ export class FooterComponent {
     this.footerClick.emit(this.selectedButton);
   }
 
+  gotomisdatos(){
+    this.router.navigate(['misdatos']);
+  }
 }

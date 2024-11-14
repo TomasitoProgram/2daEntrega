@@ -12,6 +12,7 @@ import { Route, Router } from '@angular/router';
 import { arrowBackCircleOutline } from 'ionicons/icons';
 
 @Component({
+  
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
@@ -26,7 +27,7 @@ import { arrowBackCircleOutline } from 'ionicons/icons';
   ]
 })
 export class HomePage implements OnInit {
-
+  selectedComponent = 'welcome';
   map: L.Map | null = null;
   addressName: string = '';
   distance: string = '';
@@ -166,5 +167,8 @@ export class HomePage implements OnInit {
     this.router.navigate(['/ingreso']);
   }
   
-
+  footerClick(button: string) {
+    this.selectedComponent = (button === 'mis-datos') ? 'misdatos' : button;
+    console.log("Botón del footer seleccionado:", button); // Para depuración
+  }
 }
