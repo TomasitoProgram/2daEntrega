@@ -56,6 +56,11 @@ export const routes: Routes = [
   {
     path: 'misdatos',
     loadComponent: () => import('./pages/misdatos/misdatos.page').then( m => m.MisDatosPage)
+  },
+  {
+    path: 'map',
+    loadComponent: () => import('./pages/map/map.page').then( m => m.MapPage),
+    // canActivate: [ingresoGuard] 
   }
 
 

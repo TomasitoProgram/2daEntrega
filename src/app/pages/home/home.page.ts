@@ -11,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
 import { arrowBackCircleOutline } from 'ionicons/icons';
 
+import { WelcomeComponent } from 'src/app/components/welcome/welcome.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -23,6 +25,7 @@ import { arrowBackCircleOutline } from 'ionicons/icons';
     , TranslateModule // CGV-Permite usar pipe 'translate'
     , HeaderComponent // CGV-Permite usar el componente Header
     , FooterComponent // CGV-Permite usar el componente Footer
+    , WelcomeComponent
   ]
 })
 export class HomePage implements OnInit {
@@ -49,10 +52,11 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadMap();
+    //this.loadMap();
     this.fixLeafletIconPath();
   }
 
+  /*
   async loadMap() {
     debugger
     await this.geo.getCurrentPosition().then((position: { lat: number, lng: number } | null) => {
@@ -76,11 +80,15 @@ export class HomePage implements OnInit {
       console.log('Error al obtener la posición geográfica');
     });
   }
+  */
 
+  /*
   goToDUOC() {
     this.goToPosition(-33.44703, -70.65762, 50, 'Instituto DUOC Padre Alonso de Ovalle');
   }
+  */
 
+  /*
   async goToMyPosition() {
     this.geo.getCurrentPosition().then((position: { lat: number, lng: number } | null) => {
       if (position) {
@@ -88,7 +96,9 @@ export class HomePage implements OnInit {
       }
     });
   }
+  */
 
+  /*
   goToPosition(lat: number, lng: number, zoom: number, popupText: string) {
     if (this.map) {
       // Centrar el mapa en Santiago
@@ -99,7 +109,9 @@ export class HomePage implements OnInit {
       marker.bindPopup(popupText).openPopup();
     }
   }
+  */
 
+  /*
   async getMyAddress(lat: number, lng: number) {
     this.geo.getPlaceFromCoordinates(lat, lng).subscribe({
       next: (value: any) => {
@@ -111,7 +123,9 @@ export class HomePage implements OnInit {
       }
     });
   }
+  */
 
+  /*
   showRouteToDuoc() {
     this.geo.getCurrentPosition().then((position: { lat: number, lng: number } | null) => {
       if (position) {
@@ -121,12 +135,15 @@ export class HomePage implements OnInit {
       }
     });
   }
+  */
 
+  /*
   getRoute(start: { lat: number, lng: number }, end: { lat: number, lng: number }, mode: 'driving' | 'walking') {
     // URL de la API de OSRM para obtener la ruta, cambiamos el modo de transporte dinámicamente (driving o walking)
     const url = `https://router.project-osrm.org/route/v1/${mode}/${start.lng},${start.lat};${end.lng},${end.lat}?overview=full&geometries=geojson`;
     console.log(url);
   
+    
     // Realizamos una solicitud HTTP para obtener la ruta
     this.http.get(url).subscribe((response: any) => {
       if (this.map) {
@@ -151,6 +168,7 @@ export class HomePage implements OnInit {
 
     });
   }
+  */
 
   fixLeafletIconPath() {
     // Sobrescribimos las rutas de los iconos de Leaflet
@@ -163,7 +181,7 @@ export class HomePage implements OnInit {
   }
 
   retroceder(){
-    this.router.navigate(['/ingreso']);
+    this.router.navigate(['/login']);
   }
   
 
