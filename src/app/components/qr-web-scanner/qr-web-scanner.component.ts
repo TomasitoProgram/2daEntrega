@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Output, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Output, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, Platform } from '@ionic/angular';
 import { EventEmitter } from '@angular/core';
 import jsQR, { QRCode } from 'jsqr';
 import { Asistencia } from 'src/app/model/asistencia';
 import { WelcomeComponent } from '../welcome/welcome.component';
 import { FooterComponent } from '../footer/footer.component';
-
+import { ScannerService } from 'src/app/services/scanner.service';
+import { DataBaseService } from 'src/app/services/data-base.service';
 @Component({
   selector: 'app-qrwebscanner',
   templateUrl: './qr-web-scanner.component.html',
@@ -15,7 +16,7 @@ import { FooterComponent } from '../footer/footer.component';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule,WelcomeComponent,FooterComponent],
 })
-export class QrWebScannerComponent implements OnDestroy {
+export class QrWebScannerComponent implements OnDestroy,OnInit {
 
   @ViewChild('video') private video!: ElementRef;
   @ViewChild('canvas') private canvas!: ElementRef;
@@ -24,13 +25,27 @@ export class QrWebScannerComponent implements OnDestroy {
   @ViewChild(FooterComponent) footer!: FooterComponent;
 
   qrData: string = '';
-  mediaStream: MediaStream | null = null; // Almacena el flujo de medios
+  mediaStream: MediaStream | null = null;
   selectedComponent = 'welcome';
-  constructor() 
-  { 
-    this.startQrScanningForWeb();
-  }
 
+  constructor( private platform: Platform,
+    private scannerService: ScannerService, private databaseService: DataBaseService) {
+    this.startQrScanningForWeb();
+
+
+  }
+  ngOnInit() {
+    if (this.isMobileDevice()) {
+    } else {
+      this.startQrScanningForWeb();
+    }
+  }
+  // ionViewWillEnter() {
+  //   this.changeComponent('welcome');
+  // }
+  private isMobileDevice(): boolean {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
   async startQrScanningForWeb() {
     this.mediaStream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'environment' }
@@ -62,10 +77,11 @@ export class QrWebScannerComponent implements OnDestroy {
     if (qrCode) {
       const data = qrCode.data;
       if (data !== '') {
-        // Verificar si el QR escaneado es de asistencia
         if (Asistencia.isvalidasistenciaQrCode(data)) {
+        const asistencia = this.parseQrDataToAsistencia(data);  
+        this.databaseService.actualizarDatosAsistenciaQR(asistencia);
           this.stopCamera();
-          this.scanned.emit(data);  // Emitir el QR válido
+          this.scanned.emit(data);
           return true;
         } else {
         }
@@ -73,7 +89,9 @@ export class QrWebScannerComponent implements OnDestroy {
     }
     return false;
   }
-
+  private parseQrDataToAsistencia(data: string): Asistencia {
+    return Asistencia.obtenerAsistenciaDesdeQR(data);
+  }
   stopQrScanning(): void {
     this.stopCamera();
     this.stopped.emit();
@@ -83,12 +101,10 @@ export class QrWebScannerComponent implements OnDestroy {
     this.stopCamera();
   }
 
-
   stopCamera() {
     if (this.mediaStream) {
       this.mediaStream.getTracks().forEach(track => track.stop());
       this.mediaStream = null;
     }
   }
-
 }

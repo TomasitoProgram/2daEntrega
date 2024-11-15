@@ -1,3 +1,4 @@
+import { Usuario } from './../../model/usuario';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { APIClientService } from 'src/app/services/apiclient.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,11 +10,14 @@ import { IonFabButton, IonFab, IonList, IonCardContent, IonHeader
 import { pencilOutline, trashOutline, add } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Post } from 'src/app/model/post';
+
+// import { Post } from 'src/app/model/post';
+import { Publicacion } from 'src/app/model/publicacion';
+
 import { showToast } from 'src/app/tools/message-functions';
 import { addIcons } from 'ionicons';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/model/user';
+
 
 @Component({
   selector: 'app-forum',
@@ -29,11 +33,11 @@ import { User } from 'src/app/model/user';
 })
 export class ForumComponent implements OnInit, OnDestroy {
 
-  post: Post = new Post();
-  posts: Post[] = [];
+  post: Publicacion = new Publicacion();
+  posts: Publicacion[] = [];
   selectedPostText = '';
   intervalId: any = null;
-  user = new User();
+  usuario = new Usuario();
   private postsSubscription!: Subscription;
   private userSubscription!: Subscription;
 
@@ -42,13 +46,13 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.postsSubscription = this.api.postList.subscribe((posts) => {
+    this.postsSubscription = this.api.listaPublicaciones.subscribe((posts) => {
       this.posts = posts;
     });
-    this.userSubscription = this.auth.authUser.subscribe((user) => {
-      this.user = user? user : new User();
+    this.userSubscription = this.auth.usuarioAutenticado.subscribe((user) => {
+      this.usuario = user? user : new Usuario();
     });
-    this.api.refreshPostList(); // Actualiza lista de posts al iniciar
+    this.api.leerPublicaciones(); // Actualiza lista de posts al iniciar
   }
 
   ngOnDestroy() {
@@ -56,7 +60,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   cleanPost() {
-    this.post = new Post();
+    this.post = new Publicacion();
     this.selectedPostText = 'Nueva publicación';
   }
 
@@ -78,38 +82,38 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   private async createPost() {
-    this.post.author = this.user.firstName + ' ' + this.user.lastName;
-    const createdPost = await this.api.createPost(this.post);
+    this.post.author = this.usuario.nombre + ' ' + this.usuario.apellido;
+    const createdPost = await this.api.crearPublicacion(this.post);
     if (createdPost) {
-      showToast(`Publicación creada correctamente: ${createdPost.title}`);
+      showToast(`Publicación creada correctamente: ${createdPost}`);
       this.cleanPost();
     }
   }
 
   private async updatePost() {
-    this.post.author = this.user.firstName + ' ' + this.user.lastName;
-    const updatedPost = await this.api.updatePost(this.post);
+    this.post.author = this.usuario.nombre + ' ' + this.usuario.apellido;
+    const updatedPost = await this.api.actualizarPublicacion(this.post);
     if (updatedPost) {
-      showToast(`Publicación actualizada correctamente: ${updatedPost.title}`);
+      showToast(`Publicación actualizada correctamente: ${updatedPost}`);
       this.cleanPost();
     }
   }
 
-  editPost(post: Post) {
+  editPost(post: Publicacion) {
     this.post = { ...post }; // Crea una copia para editar sin afectar la lista
     this.selectedPostText = `Editando publicación #${post.id}`;
     document.getElementById('topOfPage')!.scrollIntoView({ behavior: 'smooth' });
   }
 
-  async deletePost(post: Post) {
-    const success = await this.api.deletePost(post.id);
+  async deletePost(post: Publicacion) {
+    const success = await this.api.eliminarPublicacion(post.id);
     if (success) {
       showToast(`Publicación eliminada correctamente: ${post.id}`);
       this.cleanPost();
     }
   }
 
-  getPostId(index: number, post: Post) {
+  getPostId(index: number, post: Publicacion) {
     return post.id;
   }
 }

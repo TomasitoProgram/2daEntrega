@@ -13,6 +13,7 @@ export class AuthService {
 
   keyUsuario = 'USUARIO_AUTENTICADO';
   usuarioAutenticado = new BehaviorSubject<Usuario | null>(null);
+  qrCodeData = new BehaviorSubject<string | null>(null);
 
   // La variable primerInicioSesion vale true cuando el usuario digita correctamente sus
   // credenciales y logra entrar al sistema por primera vez. Pero vale falso, si el 

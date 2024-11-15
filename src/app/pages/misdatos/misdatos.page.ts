@@ -73,6 +73,6 @@ export class MisDatosPage {
   }
 
   Yendo(){
-    this.router.navigate(['/misdatos'])
+    this.router.navigate(['/home'])
   }
 }

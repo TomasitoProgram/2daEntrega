@@ -50,15 +50,15 @@ export const routes: Routes = [
     path: 'incorrecto',
     loadComponent: () => import('./pages/incorrecto/incorrecto.page').then( m => m.IncorrectoPage)
   },
-  {
-    path: 'inicio',
-    loadComponent: () => import('./pages/inicio/inicio.page').then( m => m.InicioPage),
-    canActivate: [inicioGuard]
-  },
+  // {
+  //   path: 'inicio',
+  //   loadComponent: () => import('./pages/inicio/inicio.page').then( m => m.InicioPage),
+  //   canActivate: [inicioGuard]
+  // },
   {
     path: 'map',
     loadComponent: () => import('./pages/map/map.page').then( m => m.MapPage),
-    canActivate: [inicioGuard]
+    // canActivate: [inicioGuard]
   },
   // {
   //   path: 'misdatos',

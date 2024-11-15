@@ -4,6 +4,7 @@ import { SQLiteService } from './sqlite.service';
 import { Usuario } from '../model/usuario';
 import { BehaviorSubject } from 'rxjs';
 import { NivelEducacional } from '../model/nivel-educacional';
+import { Asistencia } from '../model/asistencia';
 
 @Injectable({
   providedIn: 'root'
@@ -48,10 +49,12 @@ export class DataBaseService {
   nombreBD = 'basedatos';
   db!: SQLiteDBConnection;
   listaUsuarios: BehaviorSubject<Usuario[]> = new BehaviorSubject<Usuario[]>([]);
-  datosQR: BehaviorSubject<string> = new BehaviorSubject('');
+  asistenciaDatosQR = new BehaviorSubject<Asistencia | null>(null);
 
   constructor(private sqliteService: SQLiteService) { }
-
+  actualizarDatosAsistenciaQR(asistencia: Asistencia) {
+    this.asistenciaDatosQR.next(asistencia);
+  }
   async inicializarBaseDeDatos() {
     await this.sqliteService.crearBaseDeDatos({database: this.nombreBD, upgrade: this.userUpgrades});
     this.db = await this.sqliteService.abrirBaseDeDatos(this.nombreBD, false, 'no-encryption', 1, false);

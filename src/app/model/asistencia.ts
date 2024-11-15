@@ -71,9 +71,23 @@ export class Asistencia {
       asi.sede = sede;
       return asi;
     }
-    obtenerAsistenciaDesdeQR(qr: string){
-      if (Asistencia.isvalidasistenciaQrCode(qr)){
-        return JSON.parse(qr) as Asistencia;
+    public static obtenerAsistenciaDesdeQR(qr: string): Asistencia {
+      if (this.isvalidasistenciaQrCode(qr)) {
+        const jsonData = JSON.parse(qr);
+  
+        // Usa `getNewasistencia` para crear un objeto Asistencia con los valores JSON parseados
+        return this.getNewasistencia(
+          Number(jsonData.bloqueInicio),
+          Number(jsonData.bloqueTermino),
+          jsonData.dia,
+          jsonData.horaFin,
+          jsonData.horaInicio,
+          jsonData.idAsignatura,
+          jsonData.nombreAsignatura,
+          jsonData.nombreProfesor,
+          jsonData.seccion,
+          jsonData.sede
+        );
       }
       return new Asistencia();
     }

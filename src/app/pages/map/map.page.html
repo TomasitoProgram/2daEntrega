@@ -16,17 +16,17 @@
 
     <ion-button shape="round" color="secondary" size="small"
         (click)="goToMyPosition()">
-      Aquí
+      {{ 'Map.Button.Aqui' | translate }}
     </ion-button>
 
     <ion-button shape="round" color="secondary" size="small"
         (click)="showRouteToDuoc()">
-      Ruta
+        {{ 'Map.Button.Ruta' | translate }}
     </ion-button>
 
     <ion-button shape="round" color="secondary" size="small"
         (click)="navegarMisDatos()">
-      Mis datos
+        {{ 'Map.Button.MisDatos' | translate }}
     </ion-button>
 
     <div *ngIf="distance">
