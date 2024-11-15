@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, AlertController } from '@ionic/angular';
 import { ViewWillEnter } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageComponent } from 'src/app/components/language/language.component';
@@ -16,11 +16,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-      CommonModule,         // CGV-Permite usar directivas comunes de Angular
-      FormsModule,          // CGV-Permite usar formularios
-      IonicModule,          // CGV-Permite usar componentes de Ionic como IonContent, IonItem, etc.
-      TranslateModule,      // CGV-Permite usar pipe 'translate'
-      LanguageComponent      // CGV-Lista de idiomas
+      CommonModule,
+      FormsModule,
+      IonicModule,
+      TranslateModule,
+      LanguageComponent
   ]
 })
 export class LoginPage implements ViewWillEnter {
@@ -33,12 +33,12 @@ export class LoginPage implements ViewWillEnter {
   constructor(
     private router: Router,
     private translate: TranslateService,
-    private authService: AuthService) 
-  { 
-    this.correo = 'atorres';
-    this.password = '1234';
-    // Los iconos deben ser agregados a uno (ver en https://ionic.io/ionicons)
-    addIcons({ colorWandOutline }); 
+    private authService: AuthService,
+    private alertController: AlertController // Inyección de AlertController
+  ) {
+    this.correo = '';
+    this.password = '';
+    addIcons({ colorWandOutline });
   }
 
   async ionViewWillEnter() {
@@ -49,16 +49,41 @@ export class LoginPage implements ViewWillEnter {
     this.router.navigate(['/theme']);
   }
 
-  login() {
-    this.authService.login(this.correo, this.password);
+  // Función para mostrar alerta
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  // Función de inicio de sesión con validación de correo y contraseña
+  async login() {
+    // Ejemplo de datos correctos
+    const correctEmail = 'atorres';
+    const correctPassword = '1234';
+
+   
+    if (this.correo !== correctEmail) {
+      await this.presentAlert('Correo incorrecto. Inténtalo de nuevo.');
+    }
+   
+    else if (this.password !== correctPassword) {
+      await this.presentAlert('Contraseña incorrecta. Inténtalo de nuevo.');
+    }
+   
+    else {
+      this.authService.login(this.correo, this.password);
+    }
   }
 
   registerNewUser() {
-    // Lógica para registrar un nuevo usuario
+    // nuevo usuario
   }
 
   passwordRecovery() {
-    // Lógica para recuperar la contraseña
     this.router.navigate(['/correo']);
   }
 
@@ -66,3 +91,4 @@ export class LoginPage implements ViewWillEnter {
     this.router.navigate(['/map']);
   }
 }
+

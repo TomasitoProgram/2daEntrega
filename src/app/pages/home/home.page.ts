@@ -60,6 +60,17 @@ export class HomePage implements OnInit {
     addicons: ({arrowBackCircleOutline});
 
   }
+
+  ionViewWillEnter() {
+    this.changeComponent('welcome');
+  }
+
+  changeComponent(name: string) {
+    this.selectedComponent = name;
+    this.footer.selectedButton = name;
+    console.log("Cambiando componente a:", name); // Para depuración
+  }
+
   async headerClick(button: string) {
 
     if (button === 'testqr')
@@ -97,12 +108,6 @@ export class HomePage implements OnInit {
     this.changeComponent('welcome');
   }
 
-  changeComponent(name: string) {
-    this.selectedComponent = name;
-    this.footer.selectedButton = name;
-    console.log("Cambiando componente a:", name); // Para depuración
-
-  }
 
   fixLeafletIconPath() {
     // Sobrescribimos las rutas de los iconos de Leaflet
@@ -118,8 +123,14 @@ export class HomePage implements OnInit {
     this.router.navigate(['/login']);
   }
   
+  // footerClick(button: string) {
+  //   this.selectedComponent = (button === 'mis-datos') ? 'misdatos' : button;
+  //   console.log("Botón del footer seleccionado:", button); // Para depuración
+  // }
+
   footerClick(button: string) {
-    this.selectedComponent = (button === 'mis-datos') ? 'misdatos' : button;
+    this.selectedComponent = button;
     console.log("Botón del footer seleccionado:", button); // Para depuración
+
   }
 }

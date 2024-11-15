@@ -17,7 +17,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 
 
 @Component({
-  selector: 'app-misdatos',
+  selector: 'app-misdatosss',
   templateUrl: './misdatos.page.html',
   styleUrls: ['./misdatos.page.scss'],
   standalone: true,

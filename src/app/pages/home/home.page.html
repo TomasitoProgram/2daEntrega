@@ -20,7 +20,7 @@
   </app-welcome>
 
   <app-misdatos
-    *ngIf="selectedComponent === 'mis-datos'">
+    *ngIf="selectedComponent === 'misdatos'">
   </app-misdatos>
 
   <app-miclase
@@ -35,5 +35,7 @@
 
 <app-welcome></app-welcome>
 
-<app-footer></app-footer>
+<app-footer
+(footerClick)="footerClick($event)">
+</app-footer>
 

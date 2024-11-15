@@ -10,6 +10,8 @@ import * as L from 'leaflet'; // Importamos Leaflet
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
@@ -31,9 +33,9 @@ export class MapPage implements OnInit {
   distance: string = '';
 
   constructor(
-    private geo: GeoService, 
+    private geo: GeoService,
     private http: HttpClient,
-  private router: Router) { 
+  private router: Router) {
 
   }
 
@@ -45,7 +47,7 @@ export class MapPage implements OnInit {
   async loadMap() {
     await this.geo.getCurrentPosition().then((position: { lat: number, lng: number } | null) => {
       if (position) {
-        
+       
         // Configuramos el centro del mapa y el nivel de zoom
         this.map = L.map('mapId').setView([position.lat, position.lng], 50);
 
@@ -53,7 +55,7 @@ export class MapPage implements OnInit {
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.map);
-        
+       
         // Ir a mi ubicación
         this.goToMyPosition();
       } else {
@@ -113,21 +115,21 @@ export class MapPage implements OnInit {
     // URL de la API de OSRM para obtener la ruta, cambiamos el modo de transporte dinámicamente (driving o walking)
     const url = `https://router.project-osrm.org/route/v1/${mode}/${start.lng},${start.lat};${end.lng},${end.lat}?overview=full&geometries=geojson`;
     console.log(url);
-  
+ 
     // Realizamos una solicitud HTTP para obtener la ruta
     this.http.get(url).subscribe((response: any) => {
       if (this.map) {
         const routeCoords = response.routes[0].geometry.coordinates;
-  
+ 
         // Convertimos las coordenadas de la ruta en formato Leaflet
         const routeLatLngs = routeCoords.map((coord: [number, number]) => [coord[1], coord[0]]);
-  
+ 
         // Dibujamos la línea de la ruta en el mapa
         const routeLine = L.polyline(routeLatLngs, { color: 'blue', weight: 5 }).addTo(this.map);
-  
+ 
         // Ajustamos el mapa para que la ruta sea visible en la pantalla
         this.map.fitBounds(routeLine.getBounds());
-  
+ 
         // Extraer la distancia y la duración de la respuesta
         const distance = response.routes[0].distance / 1000; // Distancia en kilómetros
         const duration = response.routes[0].duration / 60;   // Duración en minutos
@@ -145,7 +147,7 @@ export class MapPage implements OnInit {
       iconUrl: 'assets/leaflet/images/marker-icon.png',
       shadowUrl: 'assets/leaflet/images/marker-shadow.png',
     });
-    
+   
     L.Marker.prototype.options.icon = iconDefault;
   }
 

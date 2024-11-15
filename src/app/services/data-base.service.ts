@@ -50,6 +50,7 @@ export class DataBaseService {
   db!: SQLiteDBConnection;
   listaUsuarios: BehaviorSubject<Usuario[]> = new BehaviorSubject<Usuario[]>([]);
   asistenciaDatosQR = new BehaviorSubject<Asistencia | null>(null);
+  datosQR: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(private sqliteService: SQLiteService) { }
   actualizarDatosAsistenciaQR(asistencia: Asistencia) {

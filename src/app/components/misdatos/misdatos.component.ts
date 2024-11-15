@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -28,6 +28,9 @@ export class MisDatosComponent {
   publicaciones: Post[] = [];
   listaNivelesEducacionales: NivelEducacional[] = NivelEducacional.getNivelesEducacionales();
 
+  @ViewChild(FooterComponent) footer!: FooterComponent;
+  // selectedComponent: 'misdatos';
+
   constructor(
     private bd: DataBaseService,
     private auth: AuthService,
@@ -46,6 +49,15 @@ export class MisDatosComponent {
       }
     });
   }
+
+  // ionViewWillEnter() {
+  //   this.changeComponent('welcome');
+  // }
+  // changeComponent(name: string) {
+  //   this.selectedComponent = name;
+  //   this.footer.selectedButton = name;
+  //   console.log("Cambiando componente a:", name); // Para depuración
+  // }
 
   guardarUsuario() {
     if (this.usuario.nombre.trim() === '') {
