@@ -26,7 +26,7 @@ export class QrWebScannerComponent implements OnDestroy,OnInit {
 
   qrData: string = '';
   mediaStream: MediaStream | null = null;
-  selectedComponent = 'welcome';
+  selectedComponent = 'qrwebscanner';
 
   constructor( private platform: Platform,
     private scannerService: ScannerService, private databaseService: DataBaseService) {
@@ -40,9 +40,9 @@ export class QrWebScannerComponent implements OnDestroy,OnInit {
       this.startQrScanningForWeb();
     }
   }
-  // ionViewWillEnter() {
-  //   this.changeComponent('welcome');
-  // }
+  
+  
+
   private isMobileDevice(): boolean {
     return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }

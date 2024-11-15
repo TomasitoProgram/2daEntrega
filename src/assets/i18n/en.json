@@ -65,5 +65,9 @@
     "ThemePage.Form.DescriptionLabel": "Description",
     "ThemePage.Form.DescriptionPlaceholder": "Write a description here...",
     "ThemePage.Form.ToggleLabel": "Enable notifications",
-    "ThemePage.Form.CheckboxLabel": "I accept the terms"
+    "ThemePage.Form.CheckboxLabel": "I accept the terms",
+
+    "Map.Button.Ruta": "Ruta",
+    "Map.Button.Aqui": "Aquí",
+    "Map.Button.MisDatos": "Mis Datos"
 }

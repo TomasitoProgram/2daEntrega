@@ -65,5 +65,9 @@
     "ThemePage.Form.DescriptionLabel": "Püllün",
     "ThemePage.Form.DescriptionPlaceholder": "Eymi mülen ta püllün...",
     "ThemePage.Form.ToggleLabel": "Külfünon notificaciones",
-    "ThemePage.Form.CheckboxLabel": "Amun nien küme alka müleyfi"
+    "ThemePage.Form.CheckboxLabel": "Amun nien küme alka müleyfi",
+
+    "Map.Button.Ruta": "Ruta",
+    "Map.Button.Aqui": "Aquí",
+    "Map.Button.MisDatos": "Mis Datos"
 }

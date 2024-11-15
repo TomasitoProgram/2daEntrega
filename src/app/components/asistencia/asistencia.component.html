@@ -2,58 +2,52 @@
 
   <div class="background-image" *ngIf="asi"></div>
 
-  <!-- Card que contiene la información de "asi" -->
-  <ion-card *ngIf="asi" class="info-card">
-    <ion-card-header>
-      <ion-card-title>Información de Asistencia</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid fixed class="usuario-content">
-        <ion-row>
-          <ion-col size="5"><strong>Sede</strong></ion-col>
-          <ion-col size="7">{{ asi.sede }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>ID Asignatura</strong></ion-col>
-          <ion-col size="7">{{ asi.idAsignatura }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Sección</strong></ion-col>
-          <ion-col size="7">{{ asi.seccion }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Nombre Asignatura</strong></ion-col>
-          <ion-col size="7">{{ asi.nombreAsignatura }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Nombre Profesor</strong></ion-col>
-          <ion-col size="7">{{ asi.nombreProfesor }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Día</strong></ion-col>
-          <ion-col size="7">{{ asi.dia }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Bloque Inicio</strong></ion-col>
-          <ion-col size="7">{{ asi.bloqueInicio }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Bloque Término</strong></ion-col>
-          <ion-col size="7">{{ asi.bloqueTermino }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Hora Inicio</strong></ion-col>
-          <ion-col size="7">{{ asi.horaInicio }}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="5"><strong>Hora Fin</strong></ion-col>
-          <ion-col size="7">{{ asi.horaFin }}</ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+  <ion-grid fixed *ngIf="asi" class="dino-content">
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.Sede' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.sede }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.IdAsig' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.idAsignatura }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.Seccion' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.seccion }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.Asig' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.nombreAsignatura }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.Prof' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.nombreProfesor }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.Dia' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.dia }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.BloqIni' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.bloqueInicio }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.BloqTer' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.bloqueTermino }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.HoraIni' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.horaInicio }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5">{{ 'Asistencia.Form.HoraTer' | translate }}</ion-col>
+      <ion-col size="7">{{ asi.horaFin }}</ion-col>
+    </ion-row>
 
-  <!-- Mensaje de escaneo cuando no hay datos de asistencia -->
+
+
+  </ion-grid>
+
   <div *ngIf="!asi" class="center-frame">
     <div class="picture-frame ion-text-center">
       <img class="you-must-scan" src="/assets/images/you-must-scan.png">
