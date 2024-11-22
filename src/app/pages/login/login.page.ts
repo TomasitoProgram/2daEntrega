@@ -27,6 +27,7 @@ export class LoginPage implements ViewWillEnter {
 
   @ViewChild('selectLanguage') selectLanguage!: LanguageComponent;
 
+  // en realidad es el usuario
   correo: string;
   password: string;
 
@@ -61,22 +62,7 @@ export class LoginPage implements ViewWillEnter {
 
   // Función de inicio de sesión con validación de correo y contraseña
   async login() {
-    // Ejemplo de datos correctos
-    const correctEmail = 'atorres';
-    const correctPassword = '1234';
-
-   
-    if (this.correo !== correctEmail) {
-      await this.presentAlert('Correo incorrecto. Inténtalo de nuevo.');
-    }
-   
-    else if (this.password !== correctPassword) {
-      await this.presentAlert('Contraseña incorrecta. Inténtalo de nuevo.');
-    }
-   
-    else {
-      this.authService.login(this.correo, this.password);
-    }
+    this.authService.login(this.correo, this.password);
   }
 
   registerNewUser() {

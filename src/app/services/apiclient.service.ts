@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, lastValueFrom, retry  } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
+import { retry } from 'rxjs/operators';
+
 import { Publicacion } from '../model/publicacion';
-import { showToast } from '../tools/message-routines';
 import { showAlertError } from '../tools/message-functions';
+import { AuthService } from './auth.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,55 +20,75 @@ export class APIClientService {
     })
   };
 
-  listaPublicaciones: BehaviorSubject<Publicacion[]> = new BehaviorSubject<Publicacion[]>([]);
-  apiUrl = 'http://localhost:3000'; // Url al usar en navegador Web
-  // apiUrl = 'http://192.168.100.34:3000'; // Url al usar en mi celular en mi WIFI, tu puedes tener otra IP
-  
+  apiUrl = 'http://localhost:3000';
+  //apiUrl = 'http://192.168.100.227:3000';
+  postList: BehaviorSubject<Publicacion[]> = new BehaviorSubject<Publicacion[]>([]);
+
   constructor(private http: HttpClient) { }
 
-  async cargarPublicaciones() {
-    this.leerPublicaciones().subscribe({
-      next: (publicaciones) => {
-        this.listaPublicaciones.next(publicaciones as Publicacion[]);
-      },
-      error: (error: any) => {
-        showToast('El servicio API Rest de Publicaciones no está disponible');
-        this.listaPublicaciones.next([]);
-      }
-    });
+  // Crear una publicación y actualizar postList; devuelve el registro recién creado
+  async createPost(post: Publicacion): Promise<Publicacion | null> {
+    try {
+      const postWithoutId = {
+        "title": post.title,
+        "body": post.body,
+        "author": post.author,
+        "date": post.date,
+        "authorImage": post.authorImage
+      };
+
+      const createdPost = await lastValueFrom(
+        this.http.post<Publicacion>(this.apiUrl + '/posts', 
+          postWithoutId, this.httpOptions).pipe(retry(3))
+      );
+      await this.refreshPostList();
+      return createdPost;
+    } catch (error) {
+      showAlertError('APIClientService.createPost', error);
+      return null;
+    }
   }
 
-  crearPublicacion(publicacion: any): Observable<any> {
-    return this.http.post(this.apiUrl + '/publicaciones/', publicacion, this.httpOptions);
+  // Actualizar una publicación; devuelve la publicación actualizada
+  async updatePost(post: Publicacion): Promise<Publicacion | null> {
+    try {
+      const updatedPost = await lastValueFrom(
+        this.http.put<Publicacion>(this.apiUrl + '/posts/' + post.id, 
+          post, this.httpOptions).pipe(retry(3))
+      );
+      await this.refreshPostList();
+      return updatedPost;
+    } catch (error) {
+      showAlertError('APIClientService.updatePost', error);
+      return null;
+    }
   }
 
-  leerPublicaciones(): Observable<any> {
-    return this.http.get(this.apiUrl + '/publicaciones/');
+  // Eliminar una publicación; devuelve true si se eliminó exitosamente
+  async deletePost(id: number): Promise<boolean> {
+    try {
+      await lastValueFrom(
+        this.http.delete(this.apiUrl + '/posts/' + id, this.httpOptions).pipe(retry(3))
+      );
+      await this.refreshPostList();
+      return true;
+    } catch (error) {
+      showAlertError('APIClientService.deletePost', error);
+      return false;
+    }
   }
 
-  leerPublicacion(idPublicacion: number): Observable<any> {
-    return this.http.get(this.apiUrl + '/publicaciones/' + idPublicacion);
-  }
-
-  actualizarPublicacion(publicacion: any): Observable<any> {
-    return this.http.put(this.apiUrl + '/publicaciones/' + publicacion.id, publicacion, this.httpOptions);
-  }
-
-  eliminarPublicacion(publicacionId: number): Observable<any> {
-    return this.http.delete(this.apiUrl + '/publicaciones/' + publicacionId, this.httpOptions);
-  }
-
-  /*codigo chiquillos*/
+  // Refrescar el listado de publicaciones y notificar a los suscriptores
   async refreshPostList(): Promise<void> {
     try {
       const posts = await this.fetchPosts();
       console.log(posts);
-      this.listaPublicaciones.next(posts);
+      this.postList.next(posts);
     } catch (error) {
       showAlertError('APIClientService.refreshPostList', error);
     }
   }
-  
+
   // Obtener todas las publicaciones desde la API
   async fetchPosts(): Promise<Publicacion[]> {
     try {
@@ -78,6 +101,7 @@ export class APIClientService {
     }
   }
 
+  // Manejo de errores HTTP con detección de códigos de estado
   private handleHttpError(methodName: string, error: any): void {
     if (error instanceof HttpErrorResponse) {
       const statusCode = error.status;
@@ -96,5 +120,4 @@ export class APIClientService {
       showAlertError(`${methodName} - Error desconocido`, error);
     }
   }
-
 }

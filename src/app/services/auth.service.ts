@@ -65,7 +65,7 @@ export class AuthService {
             this.primerInicioSesion.next(true); // Avisar que es el primer inicio de sesión
             this.router.navigate(['/home']);
           } else {
-            showToast(`El correo o la password son incorrectos`);
+            showToast(`El usuario o la password son incorrectos`);
             this.router.navigate(['/login']);
           }
         });

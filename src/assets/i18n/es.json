@@ -1,7 +1,7 @@
 {
     "AppName": "DuocUC",
     "AuthorText": "Desarrollado por:",
-    "Author": "Cristián Gómez Vega",
+    "Author": "Equipo Pulento",
     "Language": "Idioma",
     "Language.English": "English",
     "Language.Spanish": "Español",
@@ -67,8 +67,8 @@
     "ThemePage.Form.ToggleLabel": "Activar notificaciones",
     "ThemePage.Form.CheckboxLabel": "Acepto los términos",
 
-
-    
-
+    "Map.Button.Ruta": "Ruta",
+    "Map.Button.Aqui": "Aquí",
+    "Map.Button.MisDatos": "Mis Datos"
     
 }

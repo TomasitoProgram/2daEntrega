@@ -46,13 +46,13 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.postsSubscription = this.api.listaPublicaciones.subscribe((posts) => {
+    this.postsSubscription = this.api.postList.subscribe((posts) => {
       this.posts = posts;
     });
     this.userSubscription = this.auth.usuarioAutenticado.subscribe((user) => {
       this.usuario = user? user : new Usuario();
     });
-    this.api.leerPublicaciones(); // Actualiza lista de posts al iniciar
+    this.api.refreshPostList(); // Actualiza lista de posts al iniciar
   }
 
   ngOnDestroy() {
@@ -83,16 +83,16 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   private async createPost() {
     this.post.author = this.usuario.nombre + ' ' + this.usuario.apellido;
-    const createdPost = await this.api.crearPublicacion(this.post);
+    const createdPost = await this.api.createPost(this.post);
     if (createdPost) {
-      showToast(`Publicación creada correctamente: ${createdPost}`);
+      showToast(`Publicación creada correctamente: ${createdPost.title}`);
       this.cleanPost();
     }
   }
 
   private async updatePost() {
     this.post.author = this.usuario.nombre + ' ' + this.usuario.apellido;
-    const updatedPost = await this.api.actualizarPublicacion(this.post);
+    const updatedPost = await this.api.updatePost(this.post);
     if (updatedPost) {
       showToast(`Publicación actualizada correctamente: ${updatedPost}`);
       this.cleanPost();
@@ -106,7 +106,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   async deletePost(post: Publicacion) {
-    const success = await this.api.eliminarPublicacion(post.id);
+    const success = await this.api.deletePost(post.id);
     if (success) {
       showToast(`Publicación eliminada correctamente: ${post.id}`);
       this.cleanPost();
