@@ -64,7 +64,15 @@ export const routes: Routes = [
   //   path: 'misdatos',
   //   loadComponent: () => import('./pages/misdatos/misdatos.page').then( m => m.MisDatosPage)
   // }
-  { path: 'misdatos', component: MisDatosComponent }  // Ruta para el componente Mis Datos
+  { path: 'misdatos', component: MisDatosComponent },   {
+    path: 'registrarme',
+    loadComponent: () => import('./pages/registrarme/registrarme.page').then( m => m.RegistrarmePage)
+  },
+  {
+    path: 'registrarme',
+    loadComponent: () => import('./pages/registrarme/registrarme.page').then( m => m.RegistrarmePage)
+  }
+ // Ruta para el componente Mis Datos
 
 
 ];
