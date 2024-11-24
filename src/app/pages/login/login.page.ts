@@ -64,6 +64,9 @@ export class LoginPage implements ViewWillEnter {
   async login() {
     this.authService.login(this.correo, this.password);
   }
+  async registrarme() {
+    this.router.navigate(['/registrarme'])
+  }
 
   registerNewUser() {
     // nuevo usuario
