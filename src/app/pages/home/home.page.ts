@@ -20,7 +20,7 @@ import { Asistencia } from 'src/app/model/asistencia';
 import { AsistenciaComponent } from 'src/app/components/asistencia/asistencia.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { ForumComponent } from 'src/app/components/forum/forum.component';
-
+import { UsuariosComponent } from 'src/app/components/usuarios/usuarios.component';
 @Component({
   
   selector: 'app-home',
@@ -40,6 +40,7 @@ import { ForumComponent } from 'src/app/components/forum/forum.component';
     , MiclaseComponent
     , AsistenciaComponent
     , ForumComponent
+    , UsuariosComponent
   ]
 })
 export class HomePage implements OnInit {

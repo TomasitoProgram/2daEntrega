@@ -37,8 +37,8 @@ export class LoginPage implements ViewWillEnter {
     private authService: AuthService,
     private alertController: AlertController // Inyección de AlertController
   ) {
-    this.correo = 'atorres';
-    this.password = '1234';
+    this.correo = '';
+    this.password = '';
     addIcons({ colorWandOutline });
   }
 

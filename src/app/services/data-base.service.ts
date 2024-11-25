@@ -5,6 +5,8 @@ import { Usuario } from '../model/usuario';
 import { BehaviorSubject } from 'rxjs';
 import { NivelEducacional } from '../model/nivel-educacional';
 import { Asistencia } from '../model/asistencia';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http'; 
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +80,19 @@ export class DataBaseService {
       'Florida'
       ));
       
+      await this.guardarUsuario(Usuario.getNewUsuario(
+        'admin', 
+        'admin@admin.cl', 
+        '1234', 
+        '¿Cuál es tu animal favorito?', 
+        'gato',
+        'Andrés', 
+        'Tortas', 
+        NivelEducacional.buscarNivelEducacional(6)!,
+        new Date(2000, 0, 5),
+        'Flowerful'
+        ));
+
     await this.guardarUsuario(Usuario.getNewUsuario(
       'jperez', 
       'jperez@duocuc.cl', 
@@ -138,11 +153,25 @@ export class DataBaseService {
   }
 
   // Delete del CRUD
-  async eliminarUsuarioUsandoCuenta(cuenta: string): Promise<void> {
-    await this.db.run('DELETE FROM USUARIO WHERE cuenta=?', 
-      [cuenta]);
-    await this.leerUsuarios();
+  eliminarUsuarioUsandoCuenta(cuenta: string): Observable<void> {
+    return new Observable((observer) => {
+      this.db.run('DELETE FROM USUARIO WHERE cuenta=?', [cuenta])
+        .then(() => {
+          // Después de eliminar, leemos los usuarios y emitimos la actualización
+          this.leerUsuarios().then(() => {
+            observer.next();
+            observer.complete();
+          }).catch(error => {
+            observer.error(error);
+          });
+        })
+        .catch(error => {
+          observer.error(error);
+        });
+    });
   }
+
+  
 
   // Validar usuario
   async buscarUsuarioValido(cuenta: string, password: string): Promise<Usuario | undefined> {

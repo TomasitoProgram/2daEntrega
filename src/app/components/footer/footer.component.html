@@ -27,6 +27,10 @@
         {{ "HomePage.Button.Forum" | translate }}
       </ion-segment-button>
 
+      <ion-segment-button *ngIf="isAtorres" value="usuarios">
+        <ion-icon name="extension-puzzle-outline"></ion-icon>
+        {{ "HomePage.Button.Usuarios" | translate }}
+      </ion-segment-button>
     </ion-segment>
 
   </ion-toolbar>

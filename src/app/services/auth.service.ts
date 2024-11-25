@@ -83,4 +83,8 @@ export class AuthService {
     })
   }
 
+  async isUserAtorres(): Promise<boolean> {
+    const usuario = await this.leerUsuarioAutenticado();
+    return usuario?.cuenta === 'admin';
+  }
 }
