@@ -19,6 +19,7 @@ export class CorrectoPage {
 
   usuario: Usuario= new Usuario();
   
+  
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(() => {
       

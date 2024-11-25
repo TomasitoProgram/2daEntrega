@@ -72,11 +72,15 @@ export class MisDatosComponent {
 
   public actualizarNivelEducacional(event: any) {
     this.usuario.nivelEducacional = NivelEducacional.buscarNivelEducacional(event.detail.value)!;
+    this.bd.guardarUsuario(this.usuario);
+    this.auth.guardarUsuarioAutenticado(this.usuario);
   }
 
   onFechaNacimientoChange(event: any) {
     const fecha = new Date(event.detail.value);
     this.usuario.fechaNacimiento = fecha;
+    this.bd.guardarUsuario(this.usuario);
+    this.auth.guardarUsuarioAutenticado(this.usuario);
   }
 
   goBack() {
