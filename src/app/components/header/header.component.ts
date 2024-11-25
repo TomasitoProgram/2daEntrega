@@ -23,7 +23,7 @@ import { AlertController, AnimationController } from '@ionic/angular';
   ]
 })
 export class HeaderComponent implements AfterViewInit {
-  @ViewChild('titulo', {read: ElementRef }) itemTitulo!: ElementRef;
+  @ViewChild('titulo2', {read: ElementRef }) itemTitulo!: ElementRef;
   
   @Output() headerClick = new EventEmitter<string>();
   constructor(private navCtrl: NavController, 

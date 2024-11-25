@@ -247,4 +247,7 @@ ion-title {
   //border: 5px solid blue !important; // Comentado: Estilo de borde para depuración visual
 }
 
+.toolbar-title {
+  z-index: 0; /* Baja el nivel de superposición */
+}
 // CGV-FIN: CSS

@@ -10,12 +10,12 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="floating" color="secondary">Título</ion-label>
-        <ion-input [(ngModel)]="post.title" placeholder="Ingresa el título de la publicación"></ion-input>
+        <ion-input id="titulo1" name="titulo1" [(ngModel)]="post.title" placeholder="Ingresa el título"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating" color="secondary">Descripción</ion-label>
-        <ion-textarea [(ngModel)]="post.body" placeholder="Escribe el contenido de la publicación"></ion-textarea>
+        <ion-textarea id="contenido_foro" [(ngModel)]="post.body" placeholder="Escribe el contenido de la publicación"></ion-textarea>
       </ion-item>
 
       <div class="ion-text-center margin-top-6">

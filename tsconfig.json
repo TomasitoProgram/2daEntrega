@@ -1,6 +1,10 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "description": "An Ionic project",
+  "jshintConfig": {
+    "esversion": 6
+  },
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -19,6 +23,7 @@
     "target": "es2022",
     "module": "es2020",
     "lib": ["es2018", "dom"],
+    "types": ["cypress"],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
