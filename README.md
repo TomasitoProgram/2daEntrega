@@ -5,6 +5,29 @@
 ### Correo DUOC: cri.gomezv@profesor.duoc.cl
 ### www.triskeledu.cl
 
+# Extensiones sugeridas para vscode
+## Extensiones de Angular
+
+**`Markdown Preview Enhanced`**: Proporciona una vista previa mejorada de archivos Markdown en VS Code, con soporte para diagramas, matemáticas, y una amplia variedad de opciones de personalización. Permite ver en tiempo real cómo se renderizará el Markdown, incluyendo gráficos, ecuaciones matemáticas (usando LaTeX), y tablas de contenido.
+
+**`Ionic (Official extension for Ionic and Capacitor development)`**: Esta extensión oficial facilita el desarrollo de aplicaciones con Ionic y Capacitor en Visual Studio Code. Permite depuración, integración con CLI de Ionic, y proporciona herramientas para optimizar la creación de aplicaciones multiplataforma (web, iOS, Android). Permite depuración de apps Ionic, ejecución de comandos de Ionic y Capacitor, y herramientas específicas para desarrollo multiplataforma.
+
+**`Switcher (de Adrian Wilczyński)`**: Permite cambiar rápidamente entre archivos relacionados en proyectos Angular (como `.html`, `.scss`, y `.ts`) usando atajos de teclado. Ideal para componentes que tienen múltiples archivos. Facilita la navegación entre archivos de un mismo componente Angular, mejorando el flujo de trabajo en VS Code:
+
+**<span style="color:red">Alt + i</span>** Cambia al archivo **<span style="color:red">.ts</span>** de la página o componente seleccionada.
+
+**<span style="color:red">Alt + o</span>** Cambia al archivo **<span style="color:red">.html</span>** de la página o componente seleccionada.
+
+**<span style="color:red">Alt + p</span>** Cambia al archivo **<span style="color:red">.scss</span>** de la página o componente seleccionada.
+
+**`Angular Latest Snippets 2024`**: Extensión que ofrece fragmentos de código actualizados para desarrollo en Angular, compatible con la última versión del framework. Incluye snippets para componentes, servicios, módulos, y más, siguiendo las mejores prácticas de Angular. Proporciona autocompletado y fragmentos listos para usar en Angular, acelerando el desarrollo y asegurando la coherencia en el código.
+
+**`Android WebView Debugging`**: Esta extensión permite depurar aplicaciones Android WebView directamente desde Visual Studio Code. Es especialmente útil para desarrolladores que crean aplicaciones híbridas o basadas en WebView.
+
+## Otras configuraciones útiles
+
+En **Archivo > Preferencias > Configuración** seleccionar la pestaña **Workspace** y buscar **"ionic: auto import icons"** para dejarlo en **"yes"**, esto hará que cada vez que agregues un icono en tu .html en modalidad standalone, el ícono se agregará automáticamente a la instrucción **"addIcons"** de tu .ts
+
 # Preparando mi celular y mi aplicación
 ## Preparando mi celular 
 
@@ -63,14 +86,26 @@ Nótese que **"cgome"** es el usuario del computador del profesor y allí debes 
 `npm i sql.js`
 `npm i @ionic/storage-angular`
 `npm i native-run`
+`npm i @capacitor/android`
 `npm i @capacitor/device`
 `npm i @capacitor/camera`
 `npm i @capacitor/geolocation`
 `npm i @capacitor/splash-screen`
 `npm i @capacitor/geolocation`
+`npm i @capacitor-mlkit/barcode-scanning`
 `npm i leaflet`
 `npm i @types/leaflet`
-ESTA COMPONENTE DIO PROBLEMAS Y LA TUVE QUE DESINSTALAR `npm i @capacitor/barcode-scanner`
+`npm i npm install --save-dev @types/body-parser`
+`npm i npm install --save-dev @types/bonjour`
+`npm i npm install --save-dev @types/connect`
+`npm i npm install --save-dev @types/connect-history-api-fallback`
+`npm i npm install --save-dev @types/cookie`
+`npm i npm install --save-dev @types/cors`
+`npm i npm install --save-dev @types/express`
+`npm i npm install --save-dev @types/express-serve-static-core`
+`npm i npm install --save-dev @types/fs-extra`
+`npm i npm install --save-dev @types/http-errors`
+`npm i npm install --save-dev @types/http-proxy`
 `npx cap sync`
 
 ## Creación de componentes
@@ -235,7 +270,7 @@ Ejecutaremos la apicación directamente en el dispositivo móvil, lo cual podemo
 
 | Parámetro   | Explicación |
 |-------------|-------------|
-| `-l`          | Es liveload, para que al guardar cambios en los archivos de Visual Studio Code, se vean reflejados inmediatamente en el celular. |
+| `-l`          | Es liveload, para que al guardar cambios en los archivos de vscode, se vean reflejados inmediatamente en el celular. |
 | `--external`  | Indica que el servidor de desarrollo estará alojado en todas las interfaces de red |
 | `--host`      | Indica la dirección IP del servidor de aplicaciones, la cual debe corresponder a la IP de tu computador. Para que esto funcione, debes tener tu computador conectado a la misma red de WIFI de tu dispositivo móvil, de modo que el celular pueda llegar a la IP del computador, donde estarán alojadas las páginas web de tu aplicación. |
 | `--port`      | Indica el puerto para el servidor de aplicaciones |
@@ -291,46 +326,61 @@ Debe ser como el siguiente:
 
 ```
 <?xml version='1.0' encoding='utf-8'?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application 
-        android:allowBackup="true" 
-        android:icon="@mipmap/ic_launcher" 
-        android:label="@string/app_name" 
-        android:roundIcon="@mipmap/ic_launcher_round" 
-        android:supportsRtl="true" 
-        android:theme="@style/AppTheme" 
-        android:usesCleartextTraffic="true">
-        <activity 
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode" 
-            android:exported="true" 
-            android:label="@string/title_activity_main" 
-            android:launchMode="singleTask" 
-            android:name=".MainActivity" 
-            android:theme="@style/AppTheme.NoActionBarLaunch">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <provider 
-            android:authorities="${applicationId}.fileprovider" 
-            android:exported="false" 
-            android:grantUriPermissions="true" 
-            android:name="androidx.core.content.FileProvider">
-            <meta-data 
-                android:name="android.support.FILE_PROVIDER_PATHS" 
-                android:resource="@xml/file_paths" />
-        </provider>
-    </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="true" />
-    <uses-permission android:name="android.permission.CAMERA" android:required="false" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+<manifest 
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+>
+  <application 
+    android:allowBackup="true" 
+    android:hardwareAccelerated="true"
+    android:icon="@mipmap/ic_launcher" 
+    android:label="@string/app_name" 
+    android:roundIcon="@mipmap/ic_launcher_round" 
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme" 
+    android:usesCleartextTraffic="true"
+  >
+    <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode" 
+      android:exported="true" 
+      android:label="@string/title_activity_main" 
+      android:launchMode="singleTask" 
+      android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBarLaunch"
+    >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <provider 
+      android:authorities="${applicationId}.fileprovider" 
+      android:exported="false" 
+      android:grantUriPermissions="true" 
+      android:name="androidx.core.content.FileProvider"
+    >
+      <meta-data 
+        android:name="android.support.FILE_PROVIDER_PATHS" 
+        android:resource="@xml/file_paths" 
+      />
+    </provider>
+    <meta-data 
+      android:name="com.google.mlkit.vision.DEPENDENCIES" 
+      android:value="barcode_ui"
+    />
+  </application>
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-feature android:name="android.hardware.location.gps" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.FLASHLIGHT"/>
 </manifest>
 ```
+INICIO BORRAR SI NO ES NECESARIO
+<uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+<uses-feature android:name="android.hardware.camera" android:required="false" />
+<uses-feature android:name="android.hardware.camera.front" android:required="false" />
+FIN BORRAR SI NO ES NECESARIO
 
 ### Geolocalización
 
@@ -402,4 +452,134 @@ A continuación, te muestro cómo puedes integrar OpenStreetMap usando Leaflet e
 Esto asegura que los iconos y otros elementos del mapa se muestren correctamente.
 
 **3. Paso 3: Crear el componente del mapa**. Ahora, puedes crear un nuevo componente o usar uno existente para mostrar el mapa. En la página de mapas, te muestro cómo implementar un mapa básico de **OpenStreetMap** usando **Leaflet** en un componente de Ionic.
-"# Proyecto_profesor_segunda" 
+
+## Pruebas END-TO-END (e2e) con CYPRESS
+
+Para agregar Cypress a tu proyecto Ionic Angular standalone, sigue estos pasos:
+
+### Paso 1: Instalar Cypress
+
+Ejecuta el siguiente comando para instalar Cypress en tu proyecto:
+
+`npm install cypress --save-dev`
+
+### Paso 2: Inicializar Cypress
+
+Una vez instalado, inicializa Cypress ejecutando:
+
+`npx cypress open`
+
+Esto creará una carpeta llamada **cypress** en tu proyecto, junto con un archivo de configuración cypress.config.js.
+
+### Paso 3: Configura Cypress para trabajar con Angular e Ionic
+
+Para integrarlo mejor con tu aplicación Ionic Angular, sigue estos pasos:
+
+Asegúrate de que en cypress.config.js, el baseUrl apunte a la dirección de tu aplicación en ejecución. Por ejemplo, si tu aplicación corre en **http://localhost:8100**, establece lo siguiente:
+
+```
+// cypress.config.js
+module.exports = {
+  e2e: {
+    baseUrl: 'http://localhost:8100',
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+  },
+};
+```
+
+Si tu proyecto utiliza autenticación o rutas protegidas, asegúrate de configurar los comandos de inicio de sesión en **cypress/support/commands.js**. "Scaffold" (o "andamiaje" en español) es un término en desarrollo de software que se refiere a la creación automática de una estructura base o plantilla de código para un proyecto. Este proceso permite generar archivos y configuraciones iniciales que sirven como punto de partida, facilitando el desarrollo al proporcionar un esqueleto o estructura inicial.
+
+
+
+### Paso 4: Agregar scripts para ejecutar Cypress
+
+Agrega los siguientes scripts en tu **package.json** para facilitar el inicio de las pruebas de Cypress:
+
+```
+"scripts": {
+  "cypress:open": "cypress open",
+  "cypress:run": "cypress run"
+}
+```
+
+### Paso 5. Crea pruebas básicas de integración
+
+Dentro de la carpeta **cypress/e2e**, puedes agregar archivos de prueba con el siguiente formato básico:
+
+```
+// cypress/e2e/sample_test.cy.js
+describe('My First Test', () => {
+  it('visits the app root url', () => {
+    cy.visit('/');
+    cy.contains('ion-content', 'Welcome');
+  });
+});
+```
+
+### Paso 6: Ejecuta Cypress
+
+Ejecuta **npm run cypress:open** para abrir la interfaz de Cypress y seleccionar pruebas específicas.
+
+O usa **npm run cypress:run** para correr todas las pruebas en modo consola.
+
+Con estos pasos, tendrás Cypress integrado en tu proyecto Ionic Angular standalone y podrás crear pruebas end-to-end de manera efectiva.
+
+La primera vez aparecerá una página de bienvenida de Cypress, donde se debe seleccionar **E2E Testing**, para construir y probar toda la experiencia de la aplicación de principio a fin de modo de asegurar que cada flujo cumpla con las expectativas.
+
+Luego aparecerán en pantalla los archivos de configuración:
+
+```
+cypress.config.ts
+cypress/support/e2e.ts
+cypress/support/commands.ts
+cypress/fixtures/example.json
+```
+
+Entonces se debe presionar el **botón continuar**.
+
+A continuación se debe seleccionar Chrome como browser, y hacer clic en **"Start E2E Testing in Chrome"**
+
+## Pruebas Unitarias con Karma/Jasmine
+
+### Configurar tsconfig.json
+
+Para que las pruebas no se topen con la configuración de Cypress y el programa encuentre las funciones de Jasmine, se debe agregar lo siguiente al final del archivo **tsconfig.json**:
+
+```
+  "exclude": [
+    "cypress/**/*.ts",
+    "cypress.config.ts"
+  ]
+```
+
+Debería quedar parecido a esto:
+
+```
+...
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "exclude": [
+    "cypress/**/*.ts",
+    "cypress.config.ts"
+  ]
+}
+```
+
+### Ejecutar las pruebas
+
+Para ejecutar las pruebas debes haber creado los archivos **spec.ts** con las pruebas de Karma/Jasmine y luego ejecutar el comando:
+
+`ng test`
+
+Si vas a probar APIClientService, primero debes haber iniciado json server con las siguientes instrucciones en consola:
+
+```
+cd _JSON-SERVER
+json-server --watch posts.json
+```

@@ -7,13 +7,13 @@
       <ion-card-subtitle>{{ selectedPostText }}</ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content>
+    <ion-card-content id="card_titulo">
       <ion-item>
         <ion-label position="floating" color="secondary">Título</ion-label>
-        <ion-input id="titulo1" name="titulo1" [(ngModel)]="post.title" placeholder="Ingresa el título"></ion-input>
+        <ion-input tabindex="1" id="titulo1" data-cy="input-titulo" name="titulo1" [(ngModel)]="post.title" placeholder="Ingresa el título"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item id="card_contenido">
         <ion-label position="floating" color="secondary">Descripción</ion-label>
         <ion-textarea id="contenido_foro" [(ngModel)]="post.body" placeholder="Escribe el contenido de la publicación"></ion-textarea>
       </ion-item>
@@ -29,11 +29,11 @@
   </ion-card>
 
   <!-- Lista de publicaciones recientes -->
-  <ion-card class="sin-bordes">
+  <ion-card id="titulo-publicaciones" class="sin-bordes">
     <ion-card-title class="con-padding-top">Publicaciones Recientes</ion-card-title>
   </ion-card>
 
-  <ion-list>
+  <ion-list id="lista-publicaciones">
     <ion-card *ngFor="let post of posts; trackBy: getPostId">
       <ion-card-header>
         <h6>(Publicación #{{ post.id }}) {{ post.author }}</h6>
