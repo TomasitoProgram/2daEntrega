@@ -251,3 +251,11 @@ ion-title {
   z-index: 0; /* Baja el nivel de superposición */
 }
 // CGV-FIN: CSS
+ion-header {
+  position: fixed;
+  z-index: 1;
+}
+#contenidoForo{
+  position: relative;
+  z-index: 1;
+}

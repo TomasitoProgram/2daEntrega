@@ -4,32 +4,32 @@
     <h3> Bienvenido(a) {{usuario.nombre}} {{ usuario.apellido }} </h3>
   </div>
 
-  <ion-item><ion-input label="Cuenta" labelPlacement="floating"
+  <ion-item><ion-input label="Cuenta" labelPlacement="floating"id="pruebaCuenta"
         [(ngModel)]="usuario.cuenta"></ion-input></ion-item>
 
-  <ion-item><ion-input label="Nombre" labelPlacement="floating"
+  <ion-item><ion-input label="Nombre" labelPlacement="floating"id="pruebaNombre"
         [(ngModel)]="usuario.nombre"></ion-input></ion-item>
 
-  <ion-item><ion-input label="Apellido" labelPlacement="floating"
+  <ion-item><ion-input label="Apellido" labelPlacement="floating"id="pruebaApellido"
          [(ngModel)]="usuario.apellido"></ion-input></ion-item>
 
-  <ion-item><ion-input label="Correo" labelPlacement="floating"
+  <ion-item><ion-input label="Correo" labelPlacement="floating"id="pruebaCorreo"
         [(ngModel)]="usuario.correo"></ion-input></ion-item>
 
-  <ion-item><ion-input label="Direccion" labelPlacement="floating"
+  <ion-item><ion-input label="Direccion" labelPlacement="floating"id="pruebaDireccion"
         [(ngModel)]="usuario.direccion"></ion-input></ion-item>
 
 
 
-  <ion-item><ion-input label="Pregunta secreta" labelPlacement="floating"
+  <ion-item><ion-input label="Pregunta secreta" labelPlacement="floating"id="pruebaPsecreta"
         [(ngModel)]="usuario.preguntaSecreta"></ion-input></ion-item>
 
-  <ion-item><ion-input label="Respuesta secreta" labelPlacement="floating"
+  <ion-item><ion-input label="Respuesta secreta" labelPlacement="floating"id="pruebaRsecreta"
         [(ngModel)]="usuario.respuestaSecreta"></ion-input></ion-item>
 
 
   <ion-item class="font-size-12">
-    <ion-select [(ngModel)]="usuario.nivelEducacional.id"
+    <ion-select [(ngModel)]="usuario.nivelEducacional.id" id="pruebaNivelEducacional"
         (ionChange)="actualizarNivelEducacional($event)"
         label="Educación" labelPlacement="floating">
       <ion-select-option *ngFor="let nivelEducacional of listaNivelesEducacionales"
@@ -40,7 +40,7 @@
   </ion-item>
 
   <ion-item>
-    <app-date-picker
+    <app-date-picker id="pruebaFecha"
         [(ngModel)]="usuario.fechaNacimiento"
         (ionChange)="onFechaNacimientoChange($event)"
         label="Nacimiento"
@@ -48,7 +48,7 @@
     </app-date-picker>
   </ion-item>
 
-  <ion-item><ion-input label="Contraseña" labelPlacement="floating"
+  <ion-item><ion-input label="Contraseña" labelPlacement="floating" id="pruebaContraseña"
     [(ngModel)]="usuario.password" type="password"></ion-input></ion-item>
 
 
