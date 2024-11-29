@@ -2,7 +2,7 @@ describe('Verificar mi aplicación', () => {
 
   let numero = Math.floor(Math.random() * 1000000) + 1;
 
-  /*
+
   it('Verificar inicio de sesión con credenciales INCORRECTAS', () => {
     cy.visit('/').then(() => {
       cy.contains('DuocUC');
@@ -37,8 +37,7 @@ describe('Verificar mi aplicación', () => {
       });
     });
   });
-  */
-  /*
+
   it('crear publicacion en el foro', () => {
     cy.visit('/').then(() => {
       cy.viewport('iphone-xr');
@@ -68,7 +67,7 @@ describe('Verificar mi aplicación', () => {
       });
     });
   });
-  */
+
   it('validar mis datos', () => {
     cy.visit('/').then(() => {
       cy.viewport('iphone-xr');
