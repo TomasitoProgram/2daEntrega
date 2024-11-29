@@ -7,6 +7,7 @@ import { NivelEducacional } from '../model/nivel-educacional';
 import { Asistencia } from '../model/asistencia';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'; 
+import { convertDateToString } from '../tools/date-functions';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class DataBaseService {
         nombre TEXT NOT NULL,
         apellido TEXT NOT NULL,
         nivelEducacional INTEGER NOT NULL,
-        fechaNacimiento INTEGER NOT NULL,
+        fechaNacimiento TEXT NOT NULL,
         direccion TEXT NOT NULL
       );
       `]
@@ -126,9 +127,10 @@ export class DataBaseService {
   // no debe poder ser cambiada.
   
   async guardarUsuario(usuario: Usuario): Promise<void> {
+    
     await this.db.run(this.sqlInsertUpdate, [usuario.cuenta, usuario.correo, usuario.password,
       usuario.preguntaSecreta, usuario.respuestaSecreta, usuario.nombre, usuario.apellido,
-      usuario.nivelEducacional.id, usuario.fechaNacimiento?.getTime(), usuario.direccion]);
+      usuario.nivelEducacional.id, convertDateToString (usuario.fechaNacimiento!), usuario.direccion]);
     await this.leerUsuarios();
   }
 

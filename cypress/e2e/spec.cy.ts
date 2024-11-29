@@ -70,7 +70,7 @@ describe('Verificar mi aplicación', () => {
 
   it('validar mis datos', () => {
     cy.visit('/').then(() => {
-      cy.viewport('iphone-xr');
+      cy.viewport(550, 750);
       cy.contains('DuocUC');
       cy.get('#userName').invoke('val', '');
       cy.get('#userName').type('atorres');

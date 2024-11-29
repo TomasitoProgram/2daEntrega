@@ -18,6 +18,7 @@ export class Persona {
   public getFechaNacimiento(): string {
     if (!this.fechaNacimiento) return 'No asignada';
     // Obtener el día y agregar un cero inicial si es necesario
+    debugger
     const day = this.fechaNacimiento.getDate().toString().padStart(2, '0');
     // Obtener el mes (agregando 1) y agregar un cero inicial si es necesario
     const month = (this.fechaNacimiento.getMonth() + 1).toString().padStart(2, '0');

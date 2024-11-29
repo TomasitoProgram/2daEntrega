@@ -15,6 +15,7 @@ export class Persona {
   }
 
   public getFechaNacimiento(): string {
+    try {
     if (!this.fechaNacimiento) return 'No asignada';
     // Obtener el día y agregar un cero inicial si es necesario
     const day = this.fechaNacimiento.getDate().toString().padStart(2, '0');
@@ -23,6 +24,10 @@ export class Persona {
     // Obtener el año
     const year = this.fechaNacimiento.getFullYear();
     return `${day}/${month}/${year}`;
+    } catch(error) {
+      debugger
+      return '01/01/2000';
+    }
   }
 
 }

@@ -1,13 +1,11 @@
 # **<span style="color: darkblue; font: verdana;">Angry-Dinosaurs</span>**
 
-### Desarrollado por el profesor Cristián Gómez Vega
+### Desarrollado por el profesor Crvistián Gómez Vega
 ### Correo Triskeledu: cgomezvega@triskeledu.cl
 ### Correo DUOC: cri.gomezv@profesor.duoc.cl
 ### www.triskeledu.cl
 
 # Extensiones sugeridas para vscode
-## Extensiones de Angular
-
 **`Markdown Preview Enhanced`**: Proporciona una vista previa mejorada de archivos Markdown en VS Code, con soporte para diagramas, matemáticas, y una amplia variedad de opciones de personalización. Permite ver en tiempo real cómo se renderizará el Markdown, incluyendo gráficos, ecuaciones matemáticas (usando LaTeX), y tablas de contenido.
 
 **`Ionic (Official extension for Ionic and Capacitor development)`**: Esta extensión oficial facilita el desarrollo de aplicaciones con Ionic y Capacitor en Visual Studio Code. Permite depuración, integración con CLI de Ionic, y proporciona herramientas para optimizar la creación de aplicaciones multiplataforma (web, iOS, Android). Permite depuración de apps Ionic, ejecución de comandos de Ionic y Capacitor, y herramientas específicas para desarrollo multiplataforma.
