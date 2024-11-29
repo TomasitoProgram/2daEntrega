@@ -81,7 +81,28 @@ describe('Verificar mi aplicación', () => {
       cy.intercept('/login').as('route').then(() => {
         cy.contains('Bienvenido(a)');
         cy.get('#botonMisDatos').click();
-        cy.get('#prueba')
+        cy.get('#pruebaCuenta').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaNombre').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaApellido').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaCorreo').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaDireccion').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaPsecreta').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaRsecreta').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaNivelEducacional').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaFecha').invoke('val', '');
+        cy.wait(500);
+        cy.get('#pruebaContraseña').invoke('val', '');
+        cy.wait(500);
+        cy.contains('Guardar').click()
+
       });
     });
   });
